@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="One stop directory and AI-enabled search to help make sense of assistance schemes in Singapore.">
+    <meta property="og:image" content="static/img/brand/metaimage.png">
+    <meta name="author" content="Schemes SG team">
+    <title>Schemes SG</title>
+    <!-- Preloader -->
+    <style>
+        @keyframes hidePreloader {
+            0% {
+                width: 100%;
+                height: 100%;
+            }
+
+            100% {
+                width: 0;
+                height: 0;
+            }
+        }
+
+        body>div.preloader {
+            position: fixed;
+            background: white;
+            width: 100%;
+            height: 100%;
+            z-index: 1071;
+            opacity: 0;
+            transition: opacity .5s ease;
+            overflow: hidden;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body:not(.loaded)>div.preloader {
+            opacity: 1;
+        }
+
+        body:not(.loaded) {
+            overflow: hidden;
+        }
+
+        body.loaded>div.preloader {
+            animation: hidePreloader .5s linear .5s forwards;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                document.querySelector('body').classList.add('loaded');
+            }, 300);
+        });
+    </script>
+    <!-- Favicon -->
+    <link rel="icon" href="static/img/brand/favicon.png" type="image/png"><!-- Font Awesome -->
+    <link rel="stylesheet" href="static/libs/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Quick CSS -->
+    <link rel="stylesheet" href="static/css/quick-website.css" id="stylesheet">
+    <script src="static/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-195207938-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-195207938-1');
+    </script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="index.html">
+                <img alt="Image placeholder" src="static/img/brand/dark.svg" id="navbar-logo">
+            </a>
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">More</a>
+                        <div class="dropdown-menu dropdown-menu-single">
+                            <a href="schemespal.html" class="dropdown-item">Schemes Pal</a>
+                            <a href="schemesbank.html" class="dropdown-item">Schemes Bank</a>
+                            <a href="schemescase.html" class="dropdown-item">Schemes Case</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="about.html" class="dropdown-item">About</a>
+                            <a href="team.html" class="dropdown-item">Our Team</a>
+                            <a href="update.html" class="dropdown-item">Updates</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Button -->
+                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="listing.html">
+                    Add listing
+                </a>
+                <!-- Mobile button -->
+                <div class="d-lg-none text-center mt-4 mb-2">
+                    <a href="listing.html" class="btn btn-block btn-sm btn-warning">Add listing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <section class="slice py-6 pt-lg-7 pb-lg-8 bg-dark">
+        <!-- Container -->
+        <div class="container">
+            <div class="row row-grid align-items-center">
+                <div class="col-lg-6">
+                    <!-- Heading -->
+                    <h1 class="h1 text-white text-center text-lg-left my-0">
+                        About
+                    </h1>
+                    <!-- Text -->
+                    <p class="lead text-white text-center text-lg-left opacity-8 py-3">
+                        A little more information about how Schemes SG came to be and thinking behind it.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- SVG separator -->
+        <div class="shape-container shape-line shape-position-bottom">
+            <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px"
+                viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class="">
+                <polygon points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+
+    <section class="slice slice-lg pb-4">
+        <div class="container position-relative zindex-100">
+            <div class="row justify-content-center mb-2 mx-2">
+                <div class="col-lg-12">
+                    <span class="badge badge-primary badge-pill">Our vision</span>
+                    <p class="h5 lh-180 mt-4 mb-2">
+                        Our vision is to empower social workers, volunteers, and in the long run even self-help users,
+                        with the tools to navigate and obtain relevant information on social assistance in Singapore
+                        quickly, easily and accurately. We tap on the power of crowdsourcing to keep information
+                        comprehensive and updated, and leverage technology to make this information more navigable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slice slice-lg" id="sct-form-contact">
+        <div class="container position-relative zindex-100">
+            <div id="accordion-2" class="accordion accordion-spaced">
+
+                <!-- Accordion card 1 -->
+                <div class="card">
+                    <div class="card-header py-4" id="heading-2-1" data-toggle="collapse" role="button"
+                        data-target="#collapse-2-1" aria-expanded="false" aria-controls="collapse-2-1">
+                        <h6 class="mb-0"><i data-feather="file" class="mr-3"></i>How it started</h6>
+                    </div>
+                    <div id="collapse-2-1" class="collapse" aria-labelledby="heading-2-1" data-parent="#accordion-2">
+                        <div class="card-body">
+                            <p>Having volunteered with various social sector organisations since 2012, I mentally
+                                accumulated a list of assistance schemes provided by various institutions. This
+                                information was shared informally with my social
+                                worker friends or volunteers when they had to refer beneficiaries to sources of help.
+                                Over the years, I realised my friends also had their own lists, and we would share these
+                                resources.
+                                I have always thought that, if all this tacit knowledge were properly KM-ed, they could
+                                be quite a powerful resource for the social sector.
+                                <br><br>
+                                In 2017, I picked up AI and full stack programming. The idea continued sitting at the
+                                back of my head,
+                                until I had to create an app for a polytechnic class project. I built a quick prototype
+                                with this topic,
+                                and people started asking me to take this idea further. After some quick user research
+                                and iteration, I
+                                revamped the product and launched an MVP in Jan 2021 which quickly gained traction
+                                amongst
+                                social workers and volunteers.
+                                <br><br>
+                                I thought -- hey, there is a chance to build something really impactful with this!
+                                <br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion card 2 -->
+                <div class="card">
+                    <div class="card-header py-4" id="heading-2-2" data-toggle="collapse" role="button"
+                        data-target="#collapse-2-2" aria-expanded="false" aria-controls="collapse-2-2">
+                        <h6 class="mb-0"><i data-feather="unlock" class="mr-3"></i>What this platform tries to solve
+                        </h6>
+                    </div>
+                    <div id="collapse-2-2" class="collapse" aria-labelledby="heading-2-2" data-parent="#accordion-2">
+                        <div class="card-body">
+                            <p>
+                                Very serious thought was put in before investing effort to build Schemes SG. My
+                                initial landscape scans and user research led me to realise:
+                                <br><br>
+                                1. Social assistance listings are piecemeal and information is fragmented across
+                                multiple sites. There are several compilations, but they are often in various PDF files
+                                hidden deep in the
+                                file repositories, so they may not be easy to find.
+                                <br><br>
+                                2. Even if one can get their hands on a compilation, no one will Ctrl + F all of them to
+                                find different schemes given how complex and multifaceted social assistance is. The
+                                information is just mind-boggling.
+                                <br><br>
+                                3. The listings may not necessarily be updated. New versions are usually completely
+                                different links. These PDF listings also mean that care workers have to depend on the
+                                original poster to
+                                issue a new version.
+                                <br><br>
+                                4. There are actually some intuitive directories (e.g. SupportGoWhere has done a great
+                                job). But these are primarily government portals and may not include NGO or VWO schemes.
+                                Again, the power of the crowdsourcing could be useful here.
+                                <br><br>
+                                This portal hopes to address the above issues by tapping on the power of the crowd to
+                                make social assistance info <strong>1) comprehensive</strong> and <strong>2)
+                                    updated</strong>, and then using technologies like AI/NLP and filters in data
+                                visualisation to make this info <strong>3) navigable.</strong> 😊
+                                <br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion card 3 -->
+                <div class="card">
+                    <div class="card-header py-4" id="heading-2-3" data-toggle="collapse" role="button"
+                        data-target="#collapse-2-3" aria-expanded="false" aria-controls="collapse-2-3">
+                        <h6 class="mb-0"><i data-feather="folder" class="mr-3"></i>Considerations behind the listings
+                        </h6>
+                    </div>
+                    <div id="collapse-2-3" class="collapse" aria-labelledby="heading-2-3" data-parent="#accordion-2">
+                        <div class="card-body">
+                            <p>
+                                <u>Here are the parameters behind how the
+                                    Bank was populated</u>:<br><br>
+                                1. All information is <strong>public-domain</strong>. Schemes SG only agglomerates
+                                info that is out there to help navigate complexity. Where individual schemes are
+                                concerned, we think the best descriptions come from the organisations themselves and use
+                                their writeups wherever possible to avoid misrepresenting their good work :)
+                                If we make edits, it is to improve search functionality, and we ensure they are minor
+                                and factually accurate. <br>
+                                <br>
+                                2. Currently, Schemes SG only lists schemes that <strong>provide benefits</strong> in
+                                cash (financial assistance, subsidies) or in kind (free food, food vouchers, free
+                                clinics, special cards which ascribe certain benefits). While <strong>services</strong>
+                                (e.g. subsidised special education) are not yet included, we may start to look into it
+                                in the near future once the team has more capacity.
+                                <br>
+                                <br>
+                                <u>Schemes SG does not include</u>:
+                                <br><br>
+                                1.<strong> Auto-inclusion schemes</strong>. The purpose of a consolidated public aid
+                                portal is to help reduce bandwidth tax, so we see no need to put in extra information
+                                that social workers and volunteers have no requirement to act on.
+                                <br><br>
+                                2.<strong> Schemes that do not have a public listing, or are not verified</strong>. We
+                                understand that sometimes, organisations may have reasons for keeping their social
+                                assistance informal. Hence, if there is no public info on it, we will not include it. If
+                                the info is crowdsourced, we ask the contributor for a link, and if there is none, we
+                                will contact the organisation or even the private individual to verify first.
+                                <br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion card 4 -->
+                <div class="card">
+                    <div class="card-header py-4" id="heading-2-4" data-toggle="collapse" role="button"
+                        data-target="#collapse-2-4" aria-expanded="false" aria-controls="collapse-2-4">
+                        <h6 class="mb-0"><i data-feather="folder" class="mr-3"></i>Technical details for geeks
+                        </h6>
+                    </div>
+                    <div id="collapse-2-4" class="collapse" aria-labelledby="heading-2-4" data-parent="#accordion-2">
+                        <div class="card-body">
+                            <p>
+                                If you are interested, Schemes Pal's natural language model involves the following
+                                transformation: Bag of Words (BoW) -> TF-IDF -> latent semantic indexing (LSI). Some
+                                resources that I used include <a
+                                    href="https://radimrehurek.com/gensim/auto_examples/core/run_topics_and_transformations.html">this</a>,
+                                <a
+                                    href="https://markroxor.github.io/gensim/static/notebooks/Topics_and_Transformations.html">this</a>
+                                and <a href="https://www.kaggle.com/devendra45/movies-similarity">this</a>. I am
+                                still experimenting if this is the most appropriate for our use case. if you have any
+                                ideas on model improvement, tuning or other aspects that can help users get more
+                                accurate listings, reach out via the <a href="listing.html">"Feedback"</a>
+                                form!
+                                <br><br>
+                                The envisioned technical steady-state is to create a <a
+                                    href="https://towardsdatascience.com/the-virtuous-cycle-of-ai-driven-growth-c3fbf35f70c">virtuous
+                                    data cycle</a>. As the user base grows, Schemes Bank contributions and
+                                Schemes Pal queries grow, allowing us to train more robust and accurate semantic
+                                matches.
+                                Schemes Case requests cover the blind spots from a domain perspective and act as sanity checks on the model. The full suite of
+                                this solution works in tandem to create an ever-improving, ever more robust Schemes SG.
+                                <br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-7 footer-dark bg-dark">
+            <!-- SVG shape -->
+            <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
+                <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px"
+                    viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve"
+                    class=" fill-section-secondary">
+                    <polygon points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+            <!-- Footer -->
+            <div class="container pt-4 px-4">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <!-- Theme's logo -->
+
+                        <!-- Schemes SG's mission -->
+                        <p class="mt-4 text-sm opacity-8 pr-lg-4"><strong>Schemes SG</strong> is a product made by
+                            someone who cares about the social sector and wants to help those in need access assistance
+                            more quickly. We hope you find it helpful!
+                            <!-- <br><br>Schemes SG is now a product under the
+                            umbrella of better.sg, Singapore's open-source public #techforgood movement.<br><br> -->
+                        </p>
+                    </div>
+                    <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
+                        <h6 class="heading mb-3">Sub-products</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="schemespal.html">Schemes Pal</a></li>
+                            <li><a href="schemesbank.html">Schemes Bank</a></li>
+                            <li><a href="schemescase.html">Schemes Case</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
+                        <h6 class="heading mb-3">Info</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="team.html">Our team</a></li>
+                            <li><a href="update.html">Updates</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
+                        <h6 class="heading mb-3">Contact</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="listing.html">Add a listing</a></li>
+                            <li><a href="listing.html">Provide feedback</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="divider divider-fade divider-dark my-4">
+                <div class="row align-items-center justify-content-md-between pb-4">
+                    <div class="col-md-6">
+                        <div class="copyright text-sm font-weight-bold text-center text-md-left">
+                            &copy; 2021 <a href="#" class="font-weight-bold" target="_blank">Schemes
+                                SG</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Core JS  -->
+    <script src="static/libs/jquery/dist/jquery.min.js"></script>
+    <script src="static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/libs/svg-injector/dist/svg-injector.min.js"></script>
+    <script src="static/libs/feather-icons/dist/feather.min.js"></script>
+    <!-- Quick JS -->
+    <script src="static/js/quick-website.js"></script>
+    <!-- Feather Icons -->
+    <script>
+        feather.replace({
+            'width': '1em',
+            'height': '1em'
+        })
+    </script>
+</body>
+
+</html>
