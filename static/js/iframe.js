@@ -13,7 +13,7 @@ $(function(){
 });
 
 
-$(window).on('resize',function(){
+/* $(window).on('resize',function(){
     if ($(window).width() >= 767) {
     $('#iframe-holder').html("");
     $('#iframe-holder').append(
@@ -24,4 +24,4 @@ $(window).on('resize',function(){
         $('#iframe-holder').append(
             '<div class="col-xl-12 google-data-studio"><iframe width="600" src="https://datastudio.google.com/embed/reporting/e9511193-d184-432c-9db7-12061cd74d93/page/0V2DC" frameborder="0" style="border:0" allowfullscreen></iframe></div>'
         )}
-});
+}); */
