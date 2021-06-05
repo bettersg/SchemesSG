@@ -22,7 +22,7 @@ spacy_nlp = spacy.load('en_core_web_sm')
 #create list of punctuations and stopwords
 punctuations = string.punctuation
 stop_words = spacy.lang.en.stop_words.STOP_WORDS
-stop_words.pop("alone","themselves")
+stop_words.remove("alone","themselves")
 stop_words.add("client")
 
 
