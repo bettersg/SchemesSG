@@ -22,9 +22,11 @@ spacy_nlp = spacy.load('en_core_web_sm')
 #create list of punctuations and stopwords
 punctuations = string.punctuation
 stop_words = spacy.lang.en.stop_words.STOP_WORDS
-stop_words.remove("alone","themselves")
-stop_words.add("client")
 
+to_delete = ["alone","themselves"]
+for elem in to_delete:
+    stop_words.discard(elem)
+stop_words.add("client")
 
 def spacy_tokenizer(sentence):
     #remove distracting single quotes
