@@ -50,6 +50,7 @@
             animation: hidePreloader .5s linear .5s forwards;
         }
     </style>
+    <script type="text/javascript" src="static/js/indexpal.js"></script>
     <script>
         window.addEventListener("load", function () {
             setTimeout(function () {
@@ -125,12 +126,12 @@
         </div>
     </nav>
     <!-- Main content -->
-    <section class="slice py-6">
+    <section class="slice py-4   bg-section-secondary">
         <div class="container">
-            <div class="row row-grid align-items-center">
-                <div class="col-12 col-md-5 col-lg-6 order-md-2 text-center">
+            <div class="row row-grid align-items-center justify-content-center">
+                <div class="col-8 col-md-5 col-lg-6 order-md-2 text-center">
                     <!-- Image -->
-                    <figure class="w-100">
+                    <figure class="w-100 responsive-picture-hide">
                         <img alt="Image placeholder"
                             src="static/img/svg/illustrations/undraw_back_to_school_inwc (1).svg"
                             class="img-fluid mw-md-120">
@@ -143,19 +144,58 @@
                     </h1>
                     <!-- Text -->
                     <p class="lead text-center text-md-left text-muted">
-                        One stop directory to quickly search for assistance schemes in Singapore, from government
-                        agencies, to VWOs, charities, self-help groups and more.
+                        Simplifying the search for public assistance in Singapore.
+                        <br><br><br>
                     </p>
-                    <!-- Buttons -->
-                    <div class="text-center text-md-left mt-6">
-                        <a href="#" class="btn btn-primary btn-icon" id="clicktoscroll">
-                            <span class="btn-inner--text">Get started</span>
-                            <span class="btn-inner--icon"><i data-feather="chevron-right"></i></span>
-                        </a>
-                    </div>
-                </div>
+
+                    <!-- Form -->
+                    <form id="indexpal">
+                        <div class="form-group">
+                            <textarea id="indexpal-text" class="form-control form-control-lg" name="Query"
+                                placeholder="E.g. Dialysis patient in need of financial assistance after being retrenched due to COVID 19" rows="3" required></textarea>
+                        </div>
+
+
+
+                        <div class="text-center">
+                            <!-- <div class="g-recaptcha" data-sitekey="6Lfs5ScUAAAAANAJwGrdfvWLFRRiVbKRE2vfoaFj"></div> -->
+                            <button id="indexpal-submit" type="button" class="btn btn-sm btn-primary mt-4 mb-4"
+                                onclick="handle_indexpal()">Search</button>
+                        </div>
+                    </form>
+                    
+                    <ul class="list-unstyled mb-0">
+                        <li class="py-2">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                        <i class="fas fa-volume-up"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="mb-0">Tell us what kind of help you need.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled mb-0">
+                        <li class="py-2">
+                            <div class="d-flex align-items-top">
+                                <div>
+                                    <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="mb-0">Be specific (see example). Do not give identifiable info.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
     </section>
 
+    <!--
     <section class="slice slice-lg bg-section-secondary">
         <div class="container" id="schemespal">
             <div class="py-1">
@@ -200,7 +240,7 @@
 
                         </p>
                         <div class="text-center">
-                            <!-- <div class="g-recaptcha" data-sitekey="6Lfs5ScUAAAAANAJwGrdfvWLFRRiVbKRE2vfoaFj"></div> -->
+                           
                             <button type="reset" class="btn-reset d-none"></button>
                             <a href="schemespal.html" class="btn btn-block btn-sm btn-primary mt-4">Go to Schemes
                                 Pal</a>
@@ -217,7 +257,7 @@
                             </div>
                         </div>
                     </div>
-    </section>
+    </section> -->
 
 
     <section class="slice slice-lg bg-section-primary pb-0">

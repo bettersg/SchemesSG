@@ -28140,5 +28140,14 @@ section
     height: 95%;
 }
 
+@media (max-width: 767px)
+{
+    .responsive-picture-hide
+    {
+        
+        height: 100%;
+        width:100%
+    }
+}
 
 /*# sourceMappingURL=quick-website.css.map */
