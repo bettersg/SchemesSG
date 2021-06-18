@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import sys
 import os
 import schemes_model as schemes_model
+from models import api as models_api
 import flask.json as json
 from flask_cors import CORS, cross_origin
 
@@ -59,7 +60,7 @@ def schemes_predict():
 	try:
 		input = request.get_json()
 		query = input['query']
-		result = schemes_model.search_similar_schemes(query)
+		result = models_api.search_similar_schemes(query)
 	except Exception as e:
 		print('Error: ',e)
 	return result
