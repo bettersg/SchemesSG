@@ -56,7 +56,7 @@ schemes_index = MatrixSimilarity(schemes_lsi_corpus, num_features = schemes_lsi_
 #Search similarity
 from operator import itemgetter
 counter = 0
-def search_similar_schemes(search_term, x):
+def search_similar_schemes(search_term):
     global counter
     query_bow = dictionary.doc2bow(spacy_tokenizer(search_term))
     query_tfidf = schemes_tfidf_model[query_bow]
@@ -79,7 +79,7 @@ def search_similar_schemes(search_term, x):
         if j == (schemes_index.num_best-1):
             break
     output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link'])
-    output = output[output['Relevance']>x]
+    output = output[output['Relevance']>20]
     jsonobject = output.to_json(orient = "records") #.encode('unicode-escape').decode('unicode-escape')
     counter = counter + 1
     jsonobject = { 
