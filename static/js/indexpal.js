@@ -8,5 +8,5 @@ function handle_indexpal() {
         .catch(error => console.error('Error!', error.message));
 
 
-    window.location = "schemespal.html?query=" + $('textarea#indexpal-text').val()
+    window.location = "schemespal.html?query=" + $('textarea#indexpal-text').val() + "&relevance=20"
 }

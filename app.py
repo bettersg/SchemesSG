@@ -59,7 +59,8 @@ def schemes_predict():
 	try:
 		input = request.get_json()
 		query = input['query']
-		result = schemes_model.search_similar_schemes(query)
+		relevance = int(input['relevance'])
+		result = schemes_model.search_similar_schemes(query, relevance)
 	except Exception as e:
 		print('Error: ',e)
 	return result
