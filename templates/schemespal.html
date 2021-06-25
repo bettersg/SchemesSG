@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="One stop directory and AI-enabled search to help make sense of assistance schemes in Singapore.">
     <meta name="author" content="Schemes SG team">
-    <meta property="og:image" content="static/img/brand/metaimage.png">
+    <meta property="og:image" content="../static/img/brand/metaimage.png">
     <title>Schemes SG - Schemes Pal</title>
     <!-- Preloader -->
     <style>
@@ -57,14 +57,14 @@
         });
     </script>
     <!-- Favicon -->
-    <link rel="icon" href="static/img/brand/favicon.png" type="image/png"><!-- Font Awesome -->
-    <link rel="stylesheet" href="static/libs/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="icon" href="../static/img/brand/favicon.png" type="image/png"><!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/libs/@fortawesome/fontawesome-free/css/all.min.css">
     <!-- Quick CSS -->
-    <link rel="stylesheet" href="static/css/quick-website.css" id="stylesheet">
-    <script src="static/libs/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/palscroll.js"></script>
-    <script type="text/javascript" src="static/js/passfromprevious.js"></script>
-    <script type="text/javascript" src="static/js/events.js"></script>
+    <link rel="stylesheet" href="../static/css/quick-website.css" id="stylesheet">
+    <script src="../static/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/palscroll.js"></script>
+    <script type="text/javascript" src="../static/js/passfromprevious.js"></script>
+    <script type="text/javascript" src="../static/js/events.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-195207938-1"></script>
     <script>
@@ -88,7 +88,7 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="index.html">
-                <img alt="Image placeholder" src="static/img/brand/dark.svg" id="navbar-logo">
+                <img alt="Image placeholder" src="../static/img/brand/dark.svg" id="navbar-logo">
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -209,7 +209,21 @@
                         <div class="form-group">
                             <textarea id= "text-input" class="form-control form-control-lg" name="Query" placeholder="Tell us a few words ..." rows="3" required></textarea>
                         </div>
-                        <div class="text-center">
+                        <br>
+                            <div>
+                                <p class="text-center">Show me schemes above relevance score of:</p>
+                                <br>
+                                <strong>
+                                    <p class="text-center" id=holder></p>
+                                </strong>
+                            </div>
+                            <br>
+                            <div class="pt-4">
+                                <label for="lenient" class="float-left">Very lenient</label>
+                                <label for="strict" class="float-right">Very strict</label>
+                                <input type="range" min="1" max="100" value="20" class="slider" name="Relevance" id="relevance">
+                            </div>
+                        <div class="text-center pt-4">
                             <!-- <div class="g-recaptcha" data-sitekey="6Lfs5ScUAAAAANAJwGrdfvWLFRRiVbKRE2vfoaFj"></div> -->
                             <button type="reset" class="btn-reset d-none"></button>
                             <button id= "schemespal-submit" type="button" class="btn btn-block btn-lg btn-primary mt-4" onclick="handle__schemespal()">Search</button>
@@ -298,12 +312,13 @@
     </footer>
     <!-- Core JS  -->
 
-    <script src="static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="static/libs/svg-injector/dist/svg-injector.min.js"></script>
-    <script src="static/libs/feather-icons/dist/feather.min.js"></script>
+    <script src="../static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/libs/svg-injector/dist/svg-injector.min.js"></script>
+    <script src="../static/libs/feather-icons/dist/feather.min.js"></script>
     <!-- Page JS -->
+    <script type="text/javascript" src="../static/js/slider.js"></script>
     <!-- Quick JS -->
-    <script src="static/js/quick-website.js"></script>
+    <script src="../static/js/quick-website.js"></script>
     <!-- Feather Icons -->
     <script>
         feather.replace({

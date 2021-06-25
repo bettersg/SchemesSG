@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
         content="One stop directory and AI-enabled search to help make sense of assistance schemes in Singapore.">
-    <meta property="og:image" content="static/img/brand/metaimage.png">
+    <meta property="og:image" content="../static/img/brand/metaimage.png">
     <meta name="author" content="Schemes SG team">
     <title>Schemes SG</title>
     <!-- Preloader -->
@@ -58,11 +58,11 @@
         });
     </script>
     <!-- Favicon -->
-    <link rel="icon" href="static/img/brand/favicon.png" type="image/png"><!-- Font Awesome -->
-    <link rel="stylesheet" href="static/libs/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="icon" href="../static/img/brand/favicon.png" type="image/png"><!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/libs/@fortawesome/fontawesome-free/css/all.min.css">
     <!-- Quick CSS -->
-    <link rel="stylesheet" href="static/css/quick-website.css" id="stylesheet">
-    <script src="static/libs/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/quick-website.css" id="stylesheet">
+    <script src="../static/libs/jquery/dist/jquery.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-195207938-1"></script>
     <script>
@@ -87,7 +87,7 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="index.html">
-                <img alt="Image placeholder" src="static/img/brand/dark.svg" id="navbar-logo">
+                <img alt="Image placeholder" src="../static/img/brand/dark.svg" id="navbar-logo">
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -159,10 +159,10 @@
                 <div class="col-lg-12">
                     <span class="badge badge-primary badge-pill">Our vision</span>
                     <p class="h5 lh-180 mt-4 mb-2">
-                        Our vision is to empower social workers, volunteers, and in the long run even self-help users,
-                        to navigate and obtain relevant information on social assistance in Singapore
+                        Our vision is to empower social workers, volunteers, and in the long run self-help users,
+                        to obtain relevant information on social assistance in Singapore
                         quickly, easily and accurately. We tap on the power of crowdsourcing to keep information
-                        comprehensive and updated. We then leverage technology to make this information more navigable.
+                        comprehensive and updated, and leverage technology to make this information navigable.
                     </p>
                 </div>
             </div>
@@ -181,27 +181,20 @@
                     </div>
                     <div id="collapse-2-1" class="collapse" aria-labelledby="heading-2-1" data-parent="#accordion-2">
                         <div class="card-body">
-                            <p>Having volunteered with various social sector organisations since 2012, I mentally
-                                accumulated a list of assistance schemes provided by various institutions. This
-                                information was shared informally with my social
-                                worker friends or volunteers when they had to refer beneficiaries to sources of help.
-                                Over the years, I realised my friends also had their own lists, and we would share these
-                                resources.
-                                I have always thought that, if all this tacit knowledge were properly KM-ed, they could
-                                be quite a powerful resource for the social sector.
+                            <p>Schemes SG started as a side project by our product lead. A long-time
+                                volunteer with various VWOs, he collated a "help-list" to facilitate referral work and
+                                built a quick front-end to share these resources with his friends. The resource gained unexpected traction with social workers and volunteers. Sensing that
+                                a consolidated directory could address care workers' pain point of having to navigate the confusing social assistance landscape, he gathered like-minded individuals from friends and the <a href="https://better.sg">better.sg</a> tech community to improve the tool.
                                 <br><br>
-                                In 2017, I picked up AI and full stack programming. The idea continued sitting at the
-                                back of my head,
-                                until I had to create an app for a polytechnic class project. I built a quick prototype
-                                with this topic,
-                                and people started asking me to take this idea further. After some quick user research
-                                and iteration, I
-                                revamped the product and launched an MVP in Jan 2021 which quickly gained traction
-                                amongst
-                                social workers and volunteers.
+                                The team engaged social workers, caregivers and friends to understand lived
+                                experiences and help-seeking practices. They found that social needs are
+                                often intertwined, and if technology could improve the search process by making sense of
+                                the entangled issues that people face, it would immensely alleviate mental burden faced by help-seekers and professionals. This
+                                inspired our natural language search tool and tagging system.
                                 <br><br>
-                                That was when I realised: hey, there is a chance to build something really impactful
-                                with this!
+                                Schemes SG is ultimately what we hope to build <i>for</i> the community, <i>with</i> the
+                                community. Your continued usage, feedback, searches and contribution of crowdsourced
+                                assistance listings help this tool get better everyday.
                                 <br><br>
                             </p>
                         </div>
@@ -218,28 +211,30 @@
                     <div id="collapse-2-2" class="collapse" aria-labelledby="heading-2-2" data-parent="#accordion-2">
                         <div class="card-body">
                             <p>
-                                Very serious thought was put in before investing effort to build Schemes SG. My
-                                initial landscape scans and user research led me to realise:
+                                Serious thought was put in before building Schemes SG. Initial landscape scans led to
+                                the realisation that:
                                 <br><br>
-                                1. Social assistance listings are piecemeal and information is fragmented across
-                                multiple sites. There are several compilations, but they are often PDF files
-                                hidden deep within the
-                                file repositories of organisations' websites, so they may not be easy to find.
+                                1. Social assistance listings were piecemeal and information was fragmented across
+                                various sites. There were some compilations, but they were often PDF files
+                                hidden within the repositories of organisations' websites, so they might not be easy to find. Search
+                                engines might also miss them.
                                 <br><br>
-                                2. Even if one can get their hands on a compilation, no one will Ctrl + F all of them to
-                                find different schemes given how complex and multifaceted social assistance is. The
-                                volume of information is just mind-boggling.
+                                2. Even if one could get their hands on a compilation, it would take a million "Ctrl +
+                                F"s and painstaking excavation to
+                                find schemes, given how complex social assistance is. The
+                                volume of information was simply mind-boggling.
                                 <br><br>
-                                3. The listings may not necessarily be updated. New versions are usually held in
+                                3. The listings might not necessarily be updated. New versions were usually held in
                                 completely
-                                different links. These PDF listings also mean that social workers and volunteers have to
+                                different links. PDF listings also meant that social workers and volunteers had to
                                 depend on the
                                 original poster to
-                                issue a new version.
+                                issue a new version should there be changes.
                                 <br><br>
-                                4. There are actually some intuitive directories (e.g. SupportGoWhere has done a great
-                                job). But these are primarily government portals and may not include NGO or VWO schemes.
-                                Again, the power of the crowdsourcing could be useful here.
+                                4. There were actually intuitive directories (e.g. SupportGoWhere has done a great
+                                job), but they were primarily government portals and might not include NGO or VWO
+                                schemes.
+                                Again, the power of the crowdsourcing could be useful here, given the size of the non-profit sector.
                                 <br><br>
                                 This portal hopes to address the above issues by tapping on the power of the crowd to
                                 make social assistance info <strong>1) comprehensive</strong> and <strong>2)
@@ -261,33 +256,33 @@
                     <div id="collapse-2-3" class="collapse" aria-labelledby="heading-2-3" data-parent="#accordion-2">
                         <div class="card-body">
                             <p>
-                                <u>Here are the parameters behind how the
+                                <u>Here are the parameters governing how the
                                     Bank was populated</u>:<br><br>
                                 1. All information is <strong>public-domain</strong>. Schemes SG only agglomerates
-                                info that is out there to help navigate complexity. Where individual schemes are
-                                concerned, we think the best descriptions come from the organisations themselves and use
-                                their writeups wherever possible to avoid misrepresenting their good work :)
-                                If we make edits, it is to improve search functionality, and we ensure they are minor
-                                and factually accurate. <br>
+                                public info to help navigate complexity. Where individual schemes are
+                                concerned, we use the descriptions from the organisations' writeups wherever possible to
+                                let them speak for their own good work :)
+                                If we make edits, it is to improve search functionality, and we ensure that they are
+                                factually accurate. <br>
                                 <br>
                                 2. Currently, Schemes SG only lists schemes that <strong>provide benefits</strong> in
                                 cash (financial assistance, subsidies) or in kind (free food, food vouchers, free
-                                clinics, special cards which ascribe certain benefits). While <strong>services</strong>
-                                (e.g. subsidised special education) are not yet included, we may start to look into it
-                                in the near future once the team has more capacity.
+                                clinics, special cards which ascribe certain benefits). We are just starting to include
+                                <strong>services</strong>
+                                (e.g. subsidised special education) as our team grows in capacity.
                                 <br>
                                 <br>
                                 <u>Schemes SG does not include</u>:
                                 <br><br>
-                                1.<strong> Auto-inclusion schemes</strong>. The purpose of a consolidated public aid
+                                1.<strong> Auto-inclusion schemes</strong>. The purpose of a public aid
                                 portal is to help reduce bandwidth tax, so we see no need to put in extra information
-                                that social workers and volunteers have no requirement to act on.
+                                that social workers and volunteers have no scope to act on.
                                 <br><br>
-                                2.<strong> Schemes that do not have a public listing, or are not verified</strong>. We
-                                understand that sometimes, organisations may have reasons for keeping their social
-                                assistance informal. Hence, if there is no public info on it, we will not include it. If
-                                the info is crowdsourced, we ask the contributor for a link, and if there is none, we
-                                will contact the organisation or even the private individual to verify first.
+                                2.<strong> Schemes that do not have a public listing or are not verified</strong>. We
+                                understand that sometimes organisations may have reasons for keeping their assistance
+                                informal. Hence, if there is no public info on it, we will not include it. If
+                                the info is crowdsourced, we ask the contributor for a link. If there is none, we
+                                do our own research to populate the info.
                                 <br><br>
                             </p>
                         </div>
@@ -304,26 +299,24 @@
                     <div id="collapse-2-4" class="collapse" aria-labelledby="heading-2-4" data-parent="#accordion-2">
                         <div class="card-body">
                             <p>
-                                If you are interested, Schemes Pal's natural language model involves the following
+                                Schemes Pal's natural language model involves the following
                                 transformation: Bag of Words (BoW) -> TF-IDF -> latent semantic indexing (LSI). Some
-                                resources that I used include <a
+                                resources used include <a
                                     href="https://radimrehurek.com/gensim/auto_examples/core/run_topics_and_transformations.html">this</a>,
                                 <a
-                                    href="https://markroxor.github.io/gensim/static/notebooks/Topics_and_Transformations.html">this</a>
-                                and <a href="https://www.kaggle.com/devendra45/movies-similarity">this</a>. I am
-                                still experimenting if this is the most appropriate for our use case. If you have any
-                                ideas on model improvement, tuning or other aspects that could help users get more
-                                accurate listings, reach out via the <a href="listing.html">"Feedback"</a>
+                                    href="https://markroxor.github.io/gensim/../static/notebooks/Topics_and_Transformations.html">this</a>
+                                and <a href="https://www.kaggle.com/devendra45/movies-similarity">this</a>. We are still
+                                improving the natural language feature, and if you have engineering expertise or
+                                insights to offer, reach out via the <a href="listing.html">"Feedback"</a>
                                 form.
                                 <br><br>
-                                The envisioned technical steady-state is a <a
-                                    href="https://towardsdatascience.com/the-virtuous-cycle-of-ai-driven-growth-c3fbf35f70c">virtuous
-                                    data cycle</a>. As the user base grows, we get more Schemes Bank contributions and
-                                Schemes Pal queries, allowing us to train more robust and accurate semantic
-                                matches.
-                                Schemes Case requests cover the blind spots from a domain perspective and act as sanity
-                                checks on the model. The three components work in tandem to create an ever-improving,
-                                ever more robust Schemes SG.
+                                Our steady-state vision is that as the user base grows, we get more Schemes Bank
+                                contributions and Schemes Pal queries, allowing us to train more robust and accurate
+                                semantic
+                                matches. Schemes Case, our volunteer service, will cover the blind spots of the model.
+                                The three components work in tandem to create an <a
+                                    href="https://towardsdatascience.com/the-virtuous-cycle-of-ai-driven-growth-c3fbf35f70c">ever-improving,
+                                    ever more robust</a> Schemes SG.
                                 <br><br>
                             </p>
                         </div>
@@ -351,8 +344,10 @@
 
                         <!-- Schemes SG's mission -->
                         <p class="mt-4 text-sm opacity-8 pr-lg-4"><strong>Schemes SG</strong> is a product made by
-                            individuals who care about the social sector and want to help those in need access assistance
-                            more quickly. It was grown with the help of better.sg, Singapore's open-source public #techforgood movement. We hope you find it helpful!</p>
+                            individuals who care about the social sector and want to help those in need access
+                            assistance
+                            more quickly. It was grown with the help of better.sg, Singapore's open-source public
+                            #techforgood movement. We hope you find it helpful!</p>
 
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
@@ -392,12 +387,12 @@
         </div>
     </footer>
     <!-- Core JS  -->
-    <script src="static/libs/jquery/dist/jquery.min.js"></script>
-    <script src="static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="static/libs/svg-injector/dist/svg-injector.min.js"></script>
-    <script src="static/libs/feather-icons/dist/feather.min.js"></script>
+    <script src="../static/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/libs/svg-injector/dist/svg-injector.min.js"></script>
+    <script src="../static/libs/feather-icons/dist/feather.min.js"></script>
     <!-- Quick JS -->
-    <script src="static/js/quick-website.js"></script>
+    <script src="../static/js/quick-website.js"></script>
     <!-- Feather Icons -->
     <script>
         feather.replace({
