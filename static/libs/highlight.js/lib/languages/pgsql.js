@@ -5,8 +5,8 @@ module.exports = function(hljs) {
   var LABEL = '<<\\s*' + UNQUOTED_IDENT + '\\s*>>';
 
   var SQL_KW =
-    // https://www.postgresql.org/docs/11/../static/sql-keywords-appendix.html
-    // https://www.postgresql.org/docs/11/../static/sql-commands.html
+    // https://www.postgresql.org/docs/11/static/sql-keywords-appendix.html
+    // https://www.postgresql.org/docs/11/static/sql-commands.html
     // SQL commands (starting words)
     'ABORT ALTER ANALYZE BEGIN CALL CHECKPOINT|10 CLOSE CLUSTER COMMENT COMMIT COPY CREATE DEALLOCATE DECLARE ' +
     'DELETE DISCARD DO DROP END EXECUTE EXPLAIN FETCH GRANT IMPORT INSERT LISTEN LOAD LOCK MOVE NOTIFY ' +
@@ -60,7 +60,7 @@ module.exports = function(hljs) {
     'OPEN ';
 
   var TYPES =
-    // https://www.postgresql.org/docs/11/../static/datatype.html
+    // https://www.postgresql.org/docs/11/static/datatype.html
     'BIGINT INT8 BIGSERIAL SERIAL8 BIT VARYING VARBIT BOOLEAN BOOL BOX BYTEA CHARACTER CHAR VARCHAR ' +
     'CIDR CIRCLE DATE DOUBLE PRECISION FLOAT8 FLOAT INET INTEGER INT INT4 INTERVAL JSON JSONB LINE LSEG|10 ' +
     'MACADDR MACADDR8 MONEY NUMERIC DEC DECIMAL PATH POINT POLYGON REAL FLOAT4 SMALLINT INT2 ' +
@@ -97,7 +97,7 @@ module.exports = function(hljs) {
     'PG_EXCEPTION_HINT|10 PG_EXCEPTION_CONTEXT|10 ';
 
   var PLPGSQL_EXCEPTIONS =
-    // exceptions https://www.postgresql.org/docs/current/../static/errcodes-appendix.html
+    // exceptions https://www.postgresql.org/docs/current/static/errcodes-appendix.html
     'SQLSTATE SQLERRM|10 ' +
     'SUCCESSFUL_COMPLETION WARNING DYNAMIC_RESULT_SETS_RETURNED IMPLICIT_ZERO_BIT_PADDING ' +
     'NULL_VALUE_ELIMINATED_IN_SET_FUNCTION PRIVILEGE_NOT_GRANTED PRIVILEGE_NOT_REVOKED ' +
@@ -175,50 +175,50 @@ module.exports = function(hljs) {
     'INDEX_CORRUPTED ';
 
   var FUNCTIONS =
-    // https://www.postgresql.org/docs/11/../static/functions-aggregate.html
+    // https://www.postgresql.org/docs/11/static/functions-aggregate.html
     'ARRAY_AGG AVG BIT_AND BIT_OR BOOL_AND BOOL_OR COUNT EVERY JSON_AGG JSONB_AGG JSON_OBJECT_AGG ' +
     'JSONB_OBJECT_AGG MAX MIN MODE STRING_AGG SUM XMLAGG ' +
     'CORR COVAR_POP COVAR_SAMP REGR_AVGX REGR_AVGY REGR_COUNT REGR_INTERCEPT REGR_R2 REGR_SLOPE ' +
     'REGR_SXX REGR_SXY REGR_SYY STDDEV STDDEV_POP STDDEV_SAMP VARIANCE VAR_POP VAR_SAMP ' +
     'PERCENTILE_CONT PERCENTILE_DISC ' +
-    // https://www.postgresql.org/docs/11/../static/functions-window.html
+    // https://www.postgresql.org/docs/11/static/functions-window.html
     'ROW_NUMBER RANK DENSE_RANK PERCENT_RANK CUME_DIST NTILE LAG LEAD FIRST_VALUE LAST_VALUE NTH_VALUE ' +
-    // https://www.postgresql.org/docs/11/../static/functions-comparison.html
+    // https://www.postgresql.org/docs/11/static/functions-comparison.html
     'NUM_NONNULLS NUM_NULLS ' +
-    // https://www.postgresql.org/docs/11/../static/functions-math.html
+    // https://www.postgresql.org/docs/11/static/functions-math.html
     'ABS CBRT CEIL CEILING DEGREES DIV EXP FLOOR LN LOG MOD PI POWER RADIANS ROUND SCALE SIGN SQRT ' +
     'TRUNC WIDTH_BUCKET ' +
     'RANDOM SETSEED ' +
     'ACOS ACOSD ASIN ASIND ATAN ATAND ATAN2 ATAN2D COS COSD COT COTD SIN SIND TAN TAND ' +
-    // https://www.postgresql.org/docs/11/../static/functions-string.html
+    // https://www.postgresql.org/docs/11/static/functions-string.html
     'BIT_LENGTH CHAR_LENGTH CHARACTER_LENGTH LOWER OCTET_LENGTH OVERLAY POSITION SUBSTRING TREAT TRIM UPPER ' +
     'ASCII BTRIM CHR CONCAT CONCAT_WS CONVERT CONVERT_FROM CONVERT_TO DECODE ENCODE INITCAP' +
     'LEFT LENGTH LPAD LTRIM MD5 PARSE_IDENT PG_CLIENT_ENCODING QUOTE_IDENT|10 QUOTE_LITERAL|10 ' +
     'QUOTE_NULLABLE|10 REGEXP_MATCH REGEXP_MATCHES REGEXP_REPLACE REGEXP_SPLIT_TO_ARRAY ' +
     'REGEXP_SPLIT_TO_TABLE REPEAT REPLACE REVERSE RIGHT RPAD RTRIM SPLIT_PART STRPOS SUBSTR ' +
     'TO_ASCII TO_HEX TRANSLATE ' +
-    // https://www.postgresql.org/docs/11/../static/functions-binarystring.html
+    // https://www.postgresql.org/docs/11/static/functions-binarystring.html
     'OCTET_LENGTH GET_BIT GET_BYTE SET_BIT SET_BYTE ' +
-    // https://www.postgresql.org/docs/11/../static/functions-formatting.html
+    // https://www.postgresql.org/docs/11/static/functions-formatting.html
     'TO_CHAR TO_DATE TO_NUMBER TO_TIMESTAMP ' +
-    // https://www.postgresql.org/docs/11/../static/functions-datetime.html
+    // https://www.postgresql.org/docs/11/static/functions-datetime.html
     'AGE CLOCK_TIMESTAMP|10 DATE_PART DATE_TRUNC ISFINITE JUSTIFY_DAYS JUSTIFY_HOURS JUSTIFY_INTERVAL ' +
     'MAKE_DATE MAKE_INTERVAL|10 MAKE_TIME MAKE_TIMESTAMP|10 MAKE_TIMESTAMPTZ|10 NOW STATEMENT_TIMESTAMP|10 ' +
     'TIMEOFDAY TRANSACTION_TIMESTAMP|10 ' +
-    // https://www.postgresql.org/docs/11/../static/functions-enum.html
+    // https://www.postgresql.org/docs/11/static/functions-enum.html
     'ENUM_FIRST ENUM_LAST ENUM_RANGE ' +
-    // https://www.postgresql.org/docs/11/../static/functions-geometry.html
+    // https://www.postgresql.org/docs/11/static/functions-geometry.html
     'AREA CENTER DIAMETER HEIGHT ISCLOSED ISOPEN NPOINTS PCLOSE POPEN RADIUS WIDTH ' +
     'BOX BOUND_BOX CIRCLE LINE LSEG PATH POLYGON ' +
-    // https://www.postgresql.org/docs/11/../static/functions-net.html
+    // https://www.postgresql.org/docs/11/static/functions-net.html
     'ABBREV BROADCAST HOST HOSTMASK MASKLEN NETMASK NETWORK SET_MASKLEN TEXT INET_SAME_FAMILY' +
     'INET_MERGE MACADDR8_SET7BIT ' +
-    // https://www.postgresql.org/docs/11/../static/functions-textsearch.html
+    // https://www.postgresql.org/docs/11/static/functions-textsearch.html
     'ARRAY_TO_TSVECTOR GET_CURRENT_TS_CONFIG NUMNODE PLAINTO_TSQUERY PHRASETO_TSQUERY WEBSEARCH_TO_TSQUERY ' +
     'QUERYTREE SETWEIGHT STRIP TO_TSQUERY TO_TSVECTOR JSON_TO_TSVECTOR JSONB_TO_TSVECTOR TS_DELETE ' +
     'TS_FILTER TS_HEADLINE TS_RANK TS_RANK_CD TS_REWRITE TSQUERY_PHRASE TSVECTOR_TO_ARRAY ' +
     'TSVECTOR_UPDATE_TRIGGER TSVECTOR_UPDATE_TRIGGER_COLUMN ' +
-    // https://www.postgresql.org/docs/11/../static/functions-xml.html
+    // https://www.postgresql.org/docs/11/static/functions-xml.html
     'XMLCOMMENT XMLCONCAT XMLELEMENT XMLFOREST XMLPI XMLROOT ' +
     'XMLEXISTS XML_IS_WELL_FORMED XML_IS_WELL_FORMED_DOCUMENT XML_IS_WELL_FORMED_CONTENT ' +
     'XPATH XPATH_EXISTS XMLTABLE XMLNAMESPACES ' +
@@ -228,7 +228,7 @@ module.exports = function(hljs) {
     'SCHEMA_TO_XML SCHEMA_TO_XMLSCHEMA SCHEMA_TO_XML_AND_XMLSCHEMA ' +
     'DATABASE_TO_XML DATABASE_TO_XMLSCHEMA DATABASE_TO_XML_AND_XMLSCHEMA ' +
     'XMLATTRIBUTES ' +
-    // https://www.postgresql.org/docs/11/../static/functions-json.html
+    // https://www.postgresql.org/docs/11/static/functions-json.html
     'TO_JSON TO_JSONB ARRAY_TO_JSON ROW_TO_JSON JSON_BUILD_ARRAY JSONB_BUILD_ARRAY JSON_BUILD_OBJECT ' +
     'JSONB_BUILD_OBJECT JSON_OBJECT JSONB_OBJECT JSON_ARRAY_LENGTH JSONB_ARRAY_LENGTH JSON_EACH ' +
     'JSONB_EACH JSON_EACH_TEXT JSONB_EACH_TEXT JSON_EXTRACT_PATH JSONB_EXTRACT_PATH ' +
@@ -236,31 +236,31 @@ module.exports = function(hljs) {
     'JSONB_POPULATE_RECORDSET JSON_ARRAY_ELEMENTS JSONB_ARRAY_ELEMENTS JSON_ARRAY_ELEMENTS_TEXT ' +
     'JSONB_ARRAY_ELEMENTS_TEXT JSON_TYPEOF JSONB_TYPEOF JSON_TO_RECORD JSONB_TO_RECORD JSON_TO_RECORDSET ' +
     'JSONB_TO_RECORDSET JSON_STRIP_NULLS JSONB_STRIP_NULLS JSONB_SET JSONB_INSERT JSONB_PRETTY ' +
-    // https://www.postgresql.org/docs/11/../static/functions-sequence.html
+    // https://www.postgresql.org/docs/11/static/functions-sequence.html
     'CURRVAL LASTVAL NEXTVAL SETVAL ' +
-    // https://www.postgresql.org/docs/11/../static/functions-conditional.html
+    // https://www.postgresql.org/docs/11/static/functions-conditional.html
     'COALESCE NULLIF GREATEST LEAST ' +
-    // https://www.postgresql.org/docs/11/../static/functions-array.html
+    // https://www.postgresql.org/docs/11/static/functions-array.html
     'ARRAY_APPEND ARRAY_CAT ARRAY_NDIMS ARRAY_DIMS ARRAY_FILL ARRAY_LENGTH ARRAY_LOWER ARRAY_POSITION ' +
     'ARRAY_POSITIONS ARRAY_PREPEND ARRAY_REMOVE ARRAY_REPLACE ARRAY_TO_STRING ARRAY_UPPER CARDINALITY ' +
     'STRING_TO_ARRAY UNNEST ' +
-    // https://www.postgresql.org/docs/11/../static/functions-range.html
+    // https://www.postgresql.org/docs/11/static/functions-range.html
     'ISEMPTY LOWER_INC UPPER_INC LOWER_INF UPPER_INF RANGE_MERGE ' +
-    // https://www.postgresql.org/docs/11/../static/functions-srf.html
+    // https://www.postgresql.org/docs/11/static/functions-srf.html
     'GENERATE_SERIES GENERATE_SUBSCRIPTS ' +
-    // https://www.postgresql.org/docs/11/../static/functions-info.html
+    // https://www.postgresql.org/docs/11/static/functions-info.html
     'CURRENT_DATABASE CURRENT_QUERY CURRENT_SCHEMA|10 CURRENT_SCHEMAS|10 INET_CLIENT_ADDR INET_CLIENT_PORT ' +
     'INET_SERVER_ADDR INET_SERVER_PORT ROW_SECURITY_ACTIVE FORMAT_TYPE ' +
     'TO_REGCLASS TO_REGPROC TO_REGPROCEDURE TO_REGOPER TO_REGOPERATOR TO_REGTYPE TO_REGNAMESPACE TO_REGROLE ' +
     'COL_DESCRIPTION OBJ_DESCRIPTION SHOBJ_DESCRIPTION ' +
     'TXID_CURRENT TXID_CURRENT_IF_ASSIGNED TXID_CURRENT_SNAPSHOT TXID_SNAPSHOT_XIP TXID_SNAPSHOT_XMAX ' +
     'TXID_SNAPSHOT_XMIN TXID_VISIBLE_IN_SNAPSHOT TXID_STATUS ' +
-    // https://www.postgresql.org/docs/11/../static/functions-admin.html
+    // https://www.postgresql.org/docs/11/static/functions-admin.html
     'CURRENT_SETTING SET_CONFIG BRIN_SUMMARIZE_NEW_VALUES BRIN_SUMMARIZE_RANGE BRIN_DESUMMARIZE_RANGE ' +
     'GIN_CLEAN_PENDING_LIST ' +
-    // https://www.postgresql.org/docs/11/../static/functions-trigger.html
+    // https://www.postgresql.org/docs/11/static/functions-trigger.html
     'SUPPRESS_REDUNDANT_UPDATES_TRIGGER ' +
-    // ihttps://www.postgresql.org/docs/devel/../static/lo-funcs.html
+    // ihttps://www.postgresql.org/docs/devel/static/lo-funcs.html
     'LO_FROM_BYTEA LO_PUT LO_GET LO_CREAT LO_CREATE LO_UNLINK LO_IMPORT LO_EXPORT LOREAD LOWRITE ' +
     //
     'GROUPING CAST ';
@@ -432,7 +432,7 @@ module.exports = function(hljs) {
             className: 'type',
             begin: '\\b(' + TYPES_RE + ')\\b'
           },
-          // Strings, see https://www.postgresql.org/docs/11/../static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS
+          // Strings, see https://www.postgresql.org/docs/11/static/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS
           {
             className: 'string',
             begin: '\'', end: '\'',
