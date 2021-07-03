@@ -49,7 +49,7 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
     '''Takes a user search, returns top 3 results of cross encoder & 1 randomly selected result of roBERTa
     x is the relevance score threshold (just following the old API)'''
     
-    search = str(search)
+    search = str(search.strip())
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
