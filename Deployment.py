@@ -12,11 +12,61 @@ import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer, util
 from sentence_transformers.cross_encoder import CrossEncoder
+import re
+from string import punctuation
+from spellchecker import SpellChecker
 
 df = pd.read_csv('df.csv')
 emb = torch.load('embeddings.pt')
 biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
 crossencoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2')
+
+spell = SpellChecker()
+# Add words to vocabulary. Can continue adding as new queries come in, but would advise not to go too far; may inadvertently generate a lot of false positives
+add = ['msf', 'sso', 'comcare', 'nkf', 'declutter', 'kikuchi', 'covid', 'serangoon', 'sengkang', 'hougang', 'sinda', 'bukit', 'panjang', 'ubi', 'taman', 'jurong', 'yishun', '4d']
+spell.word_frequency.load_words(add)
+
+def autocorrect(text):
+    '''Mostly works if only 1 character was wrong. Wall time is 160 - 170ms
+    Cannot autocorrect words with punctuation in between (mostly typos in contractions, e.g. "havn't").
+    Singaporean/ethnic words/names may be autocorrected into something else; medical terms may be corrected insensitively, e.g. "Kikuchi" into "kimchi"
+    If text was autocorrected, function returns a tuple. Else, function returns a string'''
+    
+    text = str(text).strip()
+    tokens = text.split()
+    corrected_text = ''
+    correction = False
+    
+    for i, word in enumerate(tokens):
+        # Sadly spellchecker strips punctuation away, so strip them first, then insert back after spellchecking
+        punctuation_front = punctuation_back = ''
+        while word[-1] in punctuation:
+            punctuation_back = word[-1] + punctuation_back
+            word = word[:-1]
+
+        while word[0] in punctuation:
+            punctuation_front += word[0]
+            word = word[1:]
+
+        corrected_word = spell.correction(word)
+        if corrected_word != word:
+            correction = True
+
+        if punctuation_front != '':
+            corrected_text += punctuation_front
+
+        corrected_text += corrected_word
+
+        if punctuation_back != '':
+            corrected_text += punctuation_back
+
+        if i + 1 < len(tokens):
+            corrected_text += ' '
+
+    if correction:
+        return corrected_text, text
+    else:
+        return text
     
 def scale(x):
     '''Cross encoder's output ranges from -11 to +11. This scales (arrays of) numbers to be between 0 to 100
@@ -45,11 +95,15 @@ def scale(x):
     x[x > scaler['high']] = 1.0
     return x  * 100
 
-def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencoder, emb = emb, df = df):
+def query_models(search, x = 0):
     '''Takes a user search, returns top 3 results of cross encoder & 1 randomly selected result of roBERTa
     x is the relevance score threshold (just following the old API)'''
     
-    search = str(search.strip())
+    temp = autocorrect(search)
+    if isinstance(temp, tuple):
+        search, original_text = temp
+    elif isinstance(temp, str):
+        search = temp
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
@@ -71,8 +125,7 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
     
     jsonobject = output.to_json(orient = 'records')
-    jsonobject = {
+    jsonobject = {  # Prolly wanna include some indicator here for front-end to say something like "Showing results for <search>. Search for <original_text> instead."
         "data": json.loads(jsonobject) 
     }
     return jsonobject
-
