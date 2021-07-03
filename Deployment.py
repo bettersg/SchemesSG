@@ -32,7 +32,6 @@ def autocorrect(text):
     Singaporean/ethnic words/names may be autocorrected into something else; medical terms may be corrected insensitively, e.g. "Kikuchi" into "kimchi"
     If text was autocorrected, function returns a tuple. Else, function returns a string'''
     
-    text = str(text).strip()
     tokens = text.split()
     corrected_text = ''
     correction = False
@@ -52,19 +51,10 @@ def autocorrect(text):
         if corrected_word != word:
             correction = True
 
-        if punctuation_front != '':
-            corrected_text += punctuation_front
-
-        corrected_text += corrected_word
-
-        if punctuation_back != '':
-            corrected_text += punctuation_back
-
-        if i + 1 < len(tokens):
-            corrected_text += ' '
+        corrected_text += punctuation_front + corrected_word + punctuation_back + ' '
 
     if correction:
-        return corrected_text, text
+        return corrected_text[:-1], text
     else:
         return text
     
@@ -95,15 +85,20 @@ def scale(x):
     x[x > scaler['high']] = 1.0
     return x  * 100
 
-def query_models(search, x = 0):
+def query_models(text, x = 0, spellcheck = True):
     '''Takes a user search, returns top 3 results of cross encoder & 1 randomly selected result of roBERTa
     x is the relevance score threshold (just following the old API)'''
     
-    temp = autocorrect(search)
-    if isinstance(temp, tuple):
-        search, original_text = temp
-    elif isinstance(temp, str):
-        search = temp
+    text = str(text).strip()
+    
+    if spellcheck:
+        temp = autocorrect(text)
+        if isinstance(temp, tuple):
+            search, _ = temp
+        elif isinstance(temp, str):
+            search = text
+    else:
+        search = text
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
@@ -125,7 +120,7 @@ def query_models(search, x = 0):
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
     
     jsonobject = output.to_json(orient = 'records')
-    jsonobject = {  # Prolly wanna include some indicator here for front-end to say something like "Showing results for <search>. Search for <original_text> instead."
+    jsonobject = {  # Prolly wanna include some indicator here for front-end to say something like "Showing results for <search>. Search for <text> instead."
         "data": json.loads(jsonobject) 
     }
     return jsonobject
