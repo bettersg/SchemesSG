@@ -53,7 +53,7 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
-    index = np.argsort(-sim)[:3]
+    index = np.argsort(-cross_sim)[:3]
     
     # Then query roBERTa
     query = biencoder.encode(search, convert_to_tensor = True)
