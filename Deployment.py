@@ -32,9 +32,9 @@ def scale(x):
         return (x - scaler['low']) / (scaler['high'] - scaler['low']) * 100
     
     # If any similarity score exceeds the original range, update pickle file to reflect the new range
-    if min(x) < low:
+    if min(x) < scaler['low']:
         scaler['low'] = max(min(x), -15)
-    if max(x) > high:
+    if max(x) > scaler['high']:
         scaler['high'] = min(max(x), 14)
     with open('scaler.pkl', 'wb') as handle:
         pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
