@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[125]:
+# In[ ]:
 
 
 import pickle
@@ -17,39 +17,38 @@ df = pd.read_csv('df.csv')
 emb = torch.load('embeddings.pt')
 biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
 crossencoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2')
-counter = 0
-
-with open('scaler.pkl', 'rb') as handle:
-    scaler = pickle.load(handle)
     
-def scale(x, low = scaler['low'], high = scaler['high'], scaler = scaler):
-    '''To automatically rescale results as new queries & descriptions come in. I've currently bounded the range to ≈(min - 2σ, max + 2σ) to be safe
+def scale(x):
+    '''Cross encoder's output ranges from -11 to +11. This scales (arrays of) numbers to be between 0 to 100
+    Automatically rescales results as new queries & descriptions come in. I've currently bounded the range to ≈(min - 2σ, max + 2σ) to be safe
     Not sure if this is the best way; maybe environmental variables would be better(?)'''
     
+    with open('scaler.pkl', 'rb') as handle:
+        scaler = pickle.load(handle)
+    
     # If all similarity scores are within original range, scale as per usual
-    index = (x >= low) & (x <= high)
+    index = (x >= scaler['low']) & (x <= scaler['high'])
     if index.all():
-        return (x - low) / (high - low) * 100
+        return (x - scaler['low']) / (scaler['high'] - scaler['low']) * 100
     
     # If any similarity score exceeds the original range, update pickle file to reflect the new range
     if min(x) < low:
-        scaler['low'] = low = max(min(x), -15)
+        scaler['low'] = max(min(x), -15)
     if max(x) > high:
-        scaler['high'] = high = min(max(x), 14)
+        scaler['high'] = min(max(x), 14)
     with open('scaler.pkl', 'wb') as handle:
         pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
     
     # Then scale data according to new range
-    x = (x - low) / (high - low)
-    x[x < low] = 0.0
-    x[x > high] = 1.0
+    x = (x - scaler['low']) / (scaler['high'] - scaler['low'])
+    x[x < scaler['low']] = 0.0
+    x[x > scaler['high']] = 1.0
     return x  * 100
 
 def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencoder, emb = emb, df = df):
     '''Takes a user search, returns top 3 results of cross encoder & 1 randomly selected result of roBERTa
     x is the relevance score threshold (just following the old API)'''
     
-    global counter
     search = str(search)
     
     # First query the cross encoder
@@ -59,24 +58,20 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
     # Then query roBERTa
     query = biencoder.encode(search, convert_to_tensor = True)
     bi_sim = util.pytorch_cos_sim(query, emb)
-    # Get top 3 similarities
+    # Get top 3 similarities, filter those already returned by cross encoder, then randomly pick 1 & append
     bi_sim = np.argsort(-bi_sim.cpu()[0])[:3]
-    # Filter out similarities already returned by cross encoder & randomly pick 1
     bi_sim = np.random.choice(np.setdiff1d(bi_sim, index))
-    # Combine indices from both transformers
     index = np.append(index, bi_sim)
-    # Get relevance scores
+    
+    # Get relevance scores & filter df
     relevance = scale(cross_sim[index])
-    # Filter df
     output = df.iloc[index, :5]
     output['Relevance'] = relevance
     output = output[output['Relevance'] > x]
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
     
     jsonobject = output.to_json(orient = 'records')
-    counter += 1
     jsonobject = {
-        "number_requests_till_date": counter,
         "data": json.loads(jsonobject) 
     }
     return jsonobject
