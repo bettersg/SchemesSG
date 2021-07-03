@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[125]:
 
 
 import pickle
@@ -63,7 +63,7 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
     index = np.append(index, bi_sim)
     relevance = scale(cross_sim[index])
     
-    output = df.iloc[index, [0, 2, 1, 6, 5]]
+    output = df.iloc[index, :5]
     output['Relevance'] = relevance
     output = output[output['Relevance'] > x]
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
@@ -75,4 +75,10 @@ def query_models(search, x = 0, biencoder = biencoder, crossencoder = crossencod
         "data": json.loads(jsonobject) 
     }
     return jsonobject
+
+
+# In[ ]:
+
+
+
 
