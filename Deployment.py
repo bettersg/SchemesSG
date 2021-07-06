@@ -93,14 +93,11 @@ def query_models(text, x = 0, spellcheck = True):
     
     text = str(text).strip()
     
+    search = text
     if spellcheck:
         temp = autocorrect(text)
         if isinstance(temp, tuple):
             search, _ = temp
-        else:
-            search = text
-    else:
-        search = text
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
