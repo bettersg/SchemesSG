@@ -10,20 +10,23 @@ import json
 import numpy as np
 import pandas as pd
 import torch
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer
 from sentence_transformers.cross_encoder import CrossEncoder
 import re
 from string import punctuation
 from spellchecker import SpellChecker
+from sklearn.metrics.pairwise import pairwise_distances
 
 df = pd.read_csv('df.csv')
-emb = torch.load('embeddings.pt')
+with open('embeddings.pkl', 'rb') as handle:
+    emb = pickle.load(handle)
 biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
 crossencoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2')
 
 spell = SpellChecker()
 # Add words to vocabulary. Can continue adding as new queries come in, but would advise not to go too far; may inadvertently generate a lot of false positives
-add = ['msf', 'sso', 'comcare', 'nkf', 'declutter', 'kikuchi', 'covid', 'serangoon', 'sengkang', 'hougang', 'sinda', 'bukit', 'panjang', 'ubi', 'taman', 'jurong', 'yishun', '4d']
+add = ['msf', 'sso', 'comcare', 'nkf', 'declutter', 'kikuchi', 'covid', 'covid-19', 'covid19', 'serangoon', 'sengkang', 'hougang', 'sinda', 'bukit', 'panjang', 'ubi',
+       'taman', 'jurong', 'yishun', '4d']
 spell.word_frequency.load_words(add)
 
 def autocorrect(text):
@@ -105,10 +108,11 @@ def query_models(text, x = 0, spellcheck = True):
     index = np.argsort(-cross_sim)[:3]
     
     # Then query roBERTa
-    query = biencoder.encode(search, convert_to_tensor = True)
-    bi_sim = util.pytorch_cos_sim(query, emb)
+    query = biencoder.encode(search, convert_to_tensor = False)
+    query = query.reshape((1, 768))
+    bi_sim = pairwise_distances(emb, query, metric = 'cosine')
     # Get top 3 similarities, filter those already returned by cross encoder, then randomly pick 1 & append
-    bi_sim = np.argsort(-bi_sim.cpu()[0])[:3]
+    bi_sim = np.argsort(-np.concatenate(bi_sim))[:3]
     bi_sim = np.random.choice(np.setdiff1d(bi_sim, index))
     index = np.append(index, bi_sim)
     
