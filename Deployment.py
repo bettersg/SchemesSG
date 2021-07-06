@@ -97,6 +97,8 @@ def query_models(text, x = 0, spellcheck = True):
         temp = autocorrect(text)
         if isinstance(temp, tuple):
             search, _ = temp
+        else:
+            search = text
     else:
         search = text
     
