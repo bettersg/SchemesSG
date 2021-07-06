@@ -9,7 +9,6 @@ from collections import Counter
 import json
 import numpy as np
 import pandas as pd
-import torch
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.cross_encoder import CrossEncoder
 import re
@@ -33,7 +32,7 @@ def autocorrect(text):
     '''Mostly works if only 1 character was wrong. Wall time is 160 - 170ms
     Cannot autocorrect words with punctuation in between (mostly typos in contractions, e.g. "havn't").
     Singaporean/ethnic words/names may be autocorrected into something else; medical terms may be corrected insensitively, e.g. "Kikuchi" into "kimchi"
-    If text was autocorrected, function returns a tuple. Else, function returns a string'''
+    If text was autocorrected, function returns a tuple. Else, returns None'''
     
     tokens = text.split()
     corrected_text = ''
@@ -59,7 +58,7 @@ def autocorrect(text):
     if correction:
         return corrected_text[:-1], text
     else:
-        return text
+        return None
     
 def scale(x):
     '''Cross encoder's output ranges from -11 to +11. This scales (arrays of) numbers to be between 0 to 100
@@ -98,8 +97,6 @@ def query_models(text, x = 0, spellcheck = True):
         temp = autocorrect(text)
         if isinstance(temp, tuple):
             search, _ = temp
-        elif isinstance(temp, str):
-            search = text
     else:
         search = text
     
