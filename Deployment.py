@@ -9,7 +9,7 @@ from collections import Counter
 import json
 import numpy as np
 import pandas as pd
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 from sentence_transformers.cross_encoder import CrossEncoder
 import re
 from string import punctuation
@@ -19,8 +19,8 @@ from sklearn.metrics.pairwise import pairwise_distances
 df = pd.read_csv('df.csv')
 with open('embeddings.pkl', 'rb') as handle:
     emb = pickle.load(handle)
-biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
-crossencoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2')
+# biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
+crossencoder = CrossEncoder('crossencoder.pt')
 
 spell = SpellChecker()
 # Add words to vocabulary. Can continue adding as new queries come in, but would advise not to go too far; may inadvertently generate a lot of false positives
@@ -104,13 +104,13 @@ def query_models(text, x = 0, spellcheck = True):
     index = np.argsort(-cross_sim)[:3]
     
     # Then query roBERTa
-    query = biencoder.encode(search, convert_to_tensor = False)
-    query = query.reshape((1, 768))
-    bi_sim = pairwise_distances(emb, query, metric = 'cosine')
-    # Get top 3 similarities, filter those already returned by cross encoder, then randomly pick 1 & append
-    bi_sim = np.argsort(-np.concatenate(bi_sim))[:3]
-    bi_sim = np.random.choice(np.setdiff1d(bi_sim, index))
-    index = np.append(index, bi_sim)
+#     query = biencoder.encode(search, convert_to_tensor = False)
+#     query = query.reshape((1, 768))
+#     bi_sim = pairwise_distances(emb, query, metric = 'cosine')
+#     # Get top 3 similarities, filter those already returned by cross encoder, then randomly pick 1 & append
+#     bi_sim = np.argsort(-np.concatenate(bi_sim))[:3]
+#     bi_sim = np.random.choice(np.setdiff1d(bi_sim, index))
+#     index = np.append(index, bi_sim)
     
     # Get relevance scores & filter df
     relevance = scale(cross_sim[index])
