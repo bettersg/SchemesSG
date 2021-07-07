@@ -17,8 +17,8 @@ from spellchecker import SpellChecker
 from sklearn.metrics.pairwise import pairwise_distances
 
 df = pd.read_csv('df.csv')
-with open('embeddings.pkl', 'rb') as handle:
-    emb = pickle.load(handle)
+# with open('embeddings.pkl', 'rb') as handle:
+#     emb = pickle.load(handle)
 # biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
 crossencoder = CrossEncoder('crossencoder.pt')
 
