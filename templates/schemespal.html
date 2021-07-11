@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="One stop directory and AI-enabled search to help make sense of assistance schemes in Singapore.">
+    <meta name="description"
+        content="One stop directory and AI-enabled search to help make sense of assistance schemes in Singapore.">
     <meta name="author" content="Schemes SG team">
     <meta property="og:image" content="static/img/brand/metaimage.png">
     <title>Schemes SG - Schemes Pal</title>
@@ -50,8 +51,8 @@
         }
     </style>
     <script>
-        window.addEventListener("load", function() {
-            setTimeout(function() {
+        window.addEventListener("load", function () {
+            setTimeout(function () {
                 document.querySelector('body').classList.add('loaded');
             }, 300);
         });
@@ -82,7 +83,7 @@
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-    </div>    
+    </div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
@@ -111,7 +112,7 @@
                             <div class="dropdown-divider"></div>
                             <a href="about.html" class="dropdown-item">About</a>
                             <a href="team.html" class="dropdown-item">Our Team</a>
-                            <a href="update.html" class="dropdown-item" >Updates</a>
+                            <a href="update.html" class="dropdown-item">Updates</a>
                         </div>
                     </li>
                 </ul>
@@ -145,7 +146,9 @@
         </div>
         <!-- SVG separator -->
         <div class="shape-container shape-line shape-position-bottom">
-            <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class="">
+            <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px"
+                viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class="">
                 <polygon points="2560 0 2560 100 0 100"></polygon>
             </svg>
         </div>
@@ -165,12 +168,16 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p>Indicate your beneficiary's/your profile (e.g. "elderly with healthcare needs"). <strong>DO NOT</strong> give identifiable info like NRIC or name. <a href="javascript:void(0)" data-container="body" data-toggle="popover" data-content="We record the query text to train the AI model and improve its accuracy to serve you better. Rest assured that we are unable to identify the individuals who entered the query or whom it refers to. You can help us ensure an even greater level of security by not providing names or identifiable detail.">Important: please read this.</a></p>
+                                    <p>Indicate your beneficiary's/your profile (e.g. "elderly with healthcare needs").
+                                        <strong>DO NOT</strong> give identifiable info like NRIC or name. <a
+                                            href="javascript:void(0)" data-container="body" data-toggle="popover"
+                                            data-content="We record the query text to train the AI model and improve its accuracy to serve you better. Rest assured that we are unable to identify the individuals who entered the query or whom it refers to. You can help us ensure an even greater level of security by not providing names or identifiable detail.">Important:
+                                            please read this.</a></p>
                                 </div>
                             </div>
                         </li>
                         <br>
-                        
+
                         <li class="py-2">
                             <div class="d-flex align-items-center">
                                 <div>
@@ -179,12 +186,13 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p>Tell us the assistance you need. The more specific you are (e.g. "financial assistance for dialysis"), the better the search.</p>
+                                    <p>Tell us the assistance you need. The more specific you are (e.g. "financial
+                                        assistance for dialysis"), the better the search.</p>
                                 </div>
                             </div>
                         </li>
                         <br>
-                        
+
                         <li class="py-2">
                             <div class="d-flex align-items-center">
                                 <div>
@@ -193,12 +201,14 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p>Example of a good search: "<u>My client needs assistance as a dialysis patient. She is also in need of a job and financial support after COVID 19 has caused her to be retrenched.</u>"</p>
+                                    <p>Example of a good search: "<u>My client needs assistance as a dialysis patient.
+                                            She is also in need of a job and financial support after COVID 19 has caused
+                                            her to be retrenched.</u>"</p>
                                 </div>
                             </div>
                         </li>
 
-                     
+
                     </ul>
                 </div>
             </div>
@@ -207,26 +217,29 @@
                     <!-- Form -->
                     <form id="schemespal">
                         <div class="form-group">
-                            <textarea id= "text-input" class="form-control form-control-lg" name="Query" placeholder="Tell us a few words ..." rows="3" required></textarea>
+                            <textarea id="text-input" class="form-control form-control-lg" name="Query"
+                                placeholder="Tell us a few words ..." rows="3" required></textarea>
                         </div>
                         <br>
-                            <div>
-                                <p class="text-center">Show me schemes above relevance score of:</p>
-                                <br>
-                                <strong>
-                                    <p class="text-center" id=holder></p>
-                                </strong>
-                            </div>
+                        <div>
+                            <p class="text-center">Show me schemes above relevance score of:</p>
                             <br>
-                            <div class="pt-4">
-                                <label for="lenient" class="float-left">Very lenient</label>
-                                <label for="strict" class="float-right">Very strict</label>
-                                <input type="range" min="1" max="100" value="20" class="slider" name="Relevance" id="relevance">
-                            </div>
+                            <strong>
+                                <p class="text-center" id=holder></p>
+                            </strong>
+                        </div>
+                        <br>
+                        <div class="pt-4">
+                            <label for="lenient" class="float-left">Very lenient</label>
+                            <label for="strict" class="float-right">Very strict</label>
+                            <input type="range" min="1" max="100" value="20" class="slider" name="Relevance"
+                                id="relevance">
+                        </div>
                         <div class="text-center pt-4">
                             <!-- <div class="g-recaptcha" data-sitekey="6Lfs5ScUAAAAANAJwGrdfvWLFRRiVbKRE2vfoaFj"></div> -->
                             <button type="reset" class="btn-reset d-none"></button>
-                            <button id= "schemespal-submit" type="button" class="btn btn-block btn-lg btn-primary mt-4" onclick="handle__schemespal()">Search</button>
+                            <button id="schemespal-submit" type="button" class="btn btn-block btn-lg btn-primary mt-4"
+                                onclick="handle__schemespal()">Search</button>
                         </div>
                     </form>
                 </div>
@@ -236,17 +249,21 @@
 
     <section class="slice slice-lg">
         <div class="container" id="filler">
-            
+
         </div>
     </section>
-    
+
     <section class="slice slice-lg">
         <div class="container text-center text-lg-left">
             <!-- Title -->
             <div class="row">
                 <div class="col-lg-12 col-md-10">
                     <span class="badge badge-danger badge-pill">Please note</span>
-                    <p class="lh-180 mt-4 mb-6">Schemes SG is only an <strong>aggregator</strong> of public domain listings and crowdsourcing. We are not a VWO, nor any assistance-giving body, and we do not guarantee successful application of any schemes listed above. Schemes Pal only serves to help you make sense of existing schemes out there. The Schemes Pal engine is <strong>still being upgraded</strong>.</p>
+                    <p class="lh-180 mt-4 mb-6">Schemes SG is only an <strong>aggregator</strong> of public domain
+                        listings and crowdsourcing. We are not a VWO, nor any assistance-giving body, and we do not
+                        guarantee successful application of any schemes listed above. Schemes Pal only serves to help
+                        you make sense of existing schemes out there. The Schemes Pal engine is <strong>still being
+                            upgraded</strong>.</p>
                 </div>
             </div>
         </div>
@@ -270,9 +287,9 @@
                         <!-- Theme's logo -->
 
                         <!-- Schemes SG's mission -->
-                        <p class="mt-4 text-sm opacity-8 pr-lg-4"><strong>Schemes SG</strong> is a product made by
-                            individuals who care about the social sector and want to help those in need access assistance
-                            more quickly. It was grown with the help of better.sg, Singapore's open-source public #techforgood movement. We hope you find it helpful!</p>
+                        <p class="mt-4 text-sm opacity-8 pr-lg-4"><strong>Schemes SG</strong> is a product from
+                            better.sg, Singapore's open-source public #techforgood movement. We hope you find it
+                            helpful!</p>
                     </div>
                     <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
                         <h6 class="heading mb-3">Sub-products</h6>
