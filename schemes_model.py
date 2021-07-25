@@ -69,10 +69,10 @@ def search_similar_schemes(search_term, x):
         schemes_names.append (
             {
                 'Relevance': round((scheme[1] * 100),2),
-                'Scheme': df_schemes['Title'][scheme[0]],
+                'Scheme': df_schemes['Scheme'][scheme[0]],
                 'Description': df_schemes['Description'][scheme[0]],
                 'Agency': df_schemes['Agency'][scheme[0]],
-                'Image': df_schemes['Background Image Link'][scheme[0]],
+                'Image': df_schemes['Image'][scheme[0]],
                 'Link': df_schemes['Link'][scheme[0]]
             }
         )
