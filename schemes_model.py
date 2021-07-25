@@ -9,7 +9,7 @@ import string
 import json
 import codecs
 
-df_schemes = pd.read_csv('schemes2.csv', encoding='cp1252')#Needed to map the scheme names back to 
+df_schemes = pd.read_csv('df.csv', encoding='cp1252')#Needed to map the scheme names back to 
 dictionary = gensim.corpora.Dictionary.load('weights_generation/dictionary') #Needed to construct mappings from BOW of the query term to the dictionary which is already preloaded
 
 schemes_tfidf_model = gensim.models.TfidfModel.load("weights_generation/tfidf.model") #Needed to feed into the LSI model
