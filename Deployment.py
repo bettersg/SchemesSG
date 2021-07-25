@@ -87,8 +87,8 @@ def scale(x):
     x[x > scaler['high']] = 1.0
     return x  * 100
 
-def query_models(text, x = 0, results = 5, spellcheck = True):
-    '''Takes a user search, returns top 3 results of cross encoder & 1 randomly selected result of roBERTa
+def query_models(text, x = 0, n = 5, spellcheck = True):
+    '''Takes a user search, returns top n results of cross encoder & 1 randomly selected result of roBERTa
     x is the relevance score threshold (just following the old API)'''
     
     text = str(text).strip()
@@ -101,7 +101,7 @@ def query_models(text, x = 0, results = 5, spellcheck = True):
     
     # First query the cross encoder
     cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
-    index = np.argsort(-cross_sim)[:results]
+    index = np.argsort(-cross_sim)[:n]
     
     # Then query roBERTa
 #     query = biencoder.encode(search, convert_to_tensor = False)
