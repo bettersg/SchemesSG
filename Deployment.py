@@ -5,39 +5,28 @@
 
 
 import pickle
+from collections import Counter
 import json
 import numpy as np
 import pandas as pd
-from decouple import config
-import requests
-from sentence_transformers import util
+# from sentence_transformers import SentenceTransformer
+from sentence_transformers.cross_encoder import CrossEncoder
 import re
 from string import punctuation
 from spellchecker import SpellChecker
+from sklearn.metrics.pairwise import pairwise_distances
 
 df = pd.read_csv('df.csv')
-
-# Until there's proper QC on schemes dataset
-df = df[df['Description'].str.len() >= 50]
-
-with open('embeddings.pkl', 'rb') as handle:
-    emb = pickle.load(handle)
-
-# Authorize HuggingFace Inference API
-api = config('api', default = '')
-API_URL = 'https://api-inference.huggingface.co/models/sentence-transformers/distilbert-base-nli-mean-tokens'
-headers = {'Authorization': api}
+# with open('embeddings.pkl', 'rb') as handle:
+#     emb = pickle.load(handle)
+# biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')
+crossencoder = CrossEncoder('crossencoder.pt')
 
 spell = SpellChecker()
 # Add words to vocabulary. Can continue adding as new queries come in, but would advise not to go too far; may inadvertently generate a lot of false positives
 add = ['msf', 'sso', 'comcare', 'nkf', 'declutter', 'kikuchi', 'covid', 'covid-19', 'covid19', 'serangoon', 'sengkang', 'hougang', 'sinda', 'bukit', 'panjang', 'ubi',
        'taman', 'jurong', 'yishun', '4d']
 spell.word_frequency.load_words(add)
-
-def inference(payload):
-    '''Sentence Transformer feature extraction'''
-    response = requests.post(API_URL, headers = headers, json = payload)
-    return response.json()
 
 def autocorrect(text):
     '''Mostly works if only 1 character was wrong. Wall time is 160 - 170ms
@@ -86,9 +75,9 @@ def scale(x):
     
     # If any similarity score exceeds the original range, update pickle file to reflect the new range
     if min(x) < scaler['low']:
-        scaler['low'] = max(min(x), -4.053077340126038)
+        scaler['low'] = max(min(x), -15)
     if max(x) > scaler['high']:
-        scaler['high'] = min(max(x), -3.897379755973816)
+        scaler['high'] = min(max(x), 14)
     with open('scaler.pkl', 'wb') as handle:
         pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
     
@@ -98,9 +87,9 @@ def scale(x):
     x[x > scaler['high']] = 1.0
     return x  * 100
 
-def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
-    '''Takes a user search, returns top n results of distilbert (using feature extraction under HuggingFace's Inference API)
-    relevance_threshold just follows the old API'''
+def query_models(text, x = 0, n = 5, spellcheck = True):
+    '''Takes a user search, returns top n results of cross encoder & 1 randomly selected result of roBERTa
+    x is the relevance score threshold (just following the old API)'''
     
     text = str(text).strip()
     
@@ -110,18 +99,24 @@ def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
         if isinstance(temp, tuple):
             search, _ = temp
     
-    # Problem is waiting for the model can take like 20s. Plus HuggingFace's Inference API has crashed on me for hours on end.
-    # For 1st problem, I can set up fail-safe models using Doc2Vec or LSI after 5s etc., but I worry that it will always be triggered
-    # I can setup fail-safe models using Doc2Vec or LSI, but in the meantime just try it first.
-    query = inference({'inputs': 'There is now a girl', 'options' : {'use_cache' : True, 'wait_for_model' : True}})
-    cosine = util.pytorch_cos_sim(query, emb)
-    sim = np.argsort(-np.array(cosine[0]))[:n]
+    # First query the cross encoder
+    cross_sim = crossencoder.predict([(search, i) for _, i in df[['Description']].itertuples()]) # Wall time ≈ 0.4s
+    index = np.argsort(-cross_sim)[:n]
+    
+    # Then query roBERTa
+#     query = biencoder.encode(search, convert_to_tensor = False)
+#     query = query.reshape((1, 768))
+#     bi_sim = pairwise_distances(emb, query, metric = 'cosine')
+#     # Get top 3 similarities, filter those already returned by cross encoder, then randomly pick 1 & append
+#     bi_sim = np.argsort(-np.concatenate(bi_sim))[:3]
+#     bi_sim = np.random.choice(np.setdiff1d(bi_sim, index))
+#     index = np.append(index, bi_sim)
     
     # Get relevance scores & filter df
-    relevance = scale(sim)
-    output = df.iloc[sim, :5]
+    relevance = scale(cross_sim[index])
+    output = df.iloc[index, :5]
     output['Relevance'] = relevance
-    output = output[output['Relevance'] > relevance_threshold]
+    output = output[output['Relevance'] > x]
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
     
     jsonobject = output.to_json(orient = 'records')
