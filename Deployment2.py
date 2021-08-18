@@ -72,31 +72,28 @@ def autocorrect(text):
         return None
     
 def scale(x):
-    '''Cross encoder's output ranges from -11 to +11. This scales (arrays of) numbers to be between 0 to 100
+    '''Scales (arrays of) numbers to be between 0 to 100
     Automatically rescales results as new queries & descriptions come in. I've currently bounded the range to ≈(min - 2σ, max + 2σ) to be safe
     Not sure if this is the best way; maybe environmental variables would be better(?)'''
     
-    with open('scaler.pkl', 'rb') as handle:
-        scaler = pickle.load(handle)
+#     with open('scaler.pkl', 'rb') as handle:
+#         scaler = pickle.load(handle)
     
-    # If all similarity scores are within original range, scale as per usual
-    index = (x >= scaler['low']) & (x <= scaler['high'])
-    if index.all():
-        return (x - scaler['low']) / (scaler['high'] - scaler['low']) * 100
+#     # If all similarity scores are within original range, scale as per usual
+#     index = (x >= scaler['low']) & (x <= 1)
+#     if index.all():
+#         return (x - scaler['low']) / (1 - scaler['low']) * 100
     
-    # If any similarity score exceeds the original range, update pickle file to reflect the new range
-    if min(x) < scaler['low']:
-        scaler['low'] = max(min(x), -4.053077340126038)
-    if max(x) > scaler['high']:
-        scaler['high'] = min(max(x), -3.897379755973816)
-    with open('scaler.pkl', 'wb') as handle:
-        pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
+#     # If any similarity score exceeds the original range, update pickle file to reflect the new range
+#     if min(x) < scaler['low']:
+#         scaler['low'] = min(x)
+   
+#     with open('scaler.pkl', 'wb') as handle:
+#         pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
     
-    # Then scale data according to new range
-    x = (x - scaler['low']) / (scaler['high'] - scaler['low'])
-    x[x < scaler['low']] = 0.0
-    x[x > scaler['high']] = 1.0
-    return x  * 100
+#     # Then scale data according to new range
+#     x = (x - scaler['low']) / (1 - scaler['low'])
+    return (x + 1) / 2 * 100
 
 def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
     '''Takes a user search, returns top n results of distilbert (using feature extraction under HuggingFace's Inference API)
@@ -113,7 +110,7 @@ def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
     # Problem is waiting for the model can take like 20s. Plus HuggingFace's Inference API has crashed on me for hours on end.
     # For 1st problem, I can set up fail-safe models using Doc2Vec or LSI after 5s etc., but I worry that it will always be triggered
     # I can setup fail-safe models using Doc2Vec or LSI, but in the meantime just try it first.
-    query = inference({'inputs': 'There is now a girl', 'options' : {'use_cache' : True, 'wait_for_model' : True}})
+    query = inference({'inputs': search, 'options' : {'use_cache' : True, 'wait_for_model' : True}})
     cosine = util.pytorch_cos_sim(query, emb)
     sim = np.argsort(-np.array(cosine[0]))[:n]
     
