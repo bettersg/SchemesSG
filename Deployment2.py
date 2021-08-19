@@ -16,7 +16,6 @@ from string import punctuation
 from spellchecker import SpellChecker
 
 df = pd.read_csv('df.csv')
-
 # Until there's proper QC on schemes dataset
 df = df[df['Description'].str.len() >= 50]
 
@@ -72,27 +71,7 @@ def autocorrect(text):
         return None
     
 def scale(x):
-    '''Scales (arrays of) numbers to be between 0 to 100
-    Automatically rescales results as new queries & descriptions come in. I've currently bounded the range to ≈(min - 2σ, max + 2σ) to be safe
-    Not sure if this is the best way; maybe environmental variables would be better(?)'''
-    
-#     with open('scaler.pkl', 'rb') as handle:
-#         scaler = pickle.load(handle)
-    
-#     # If all similarity scores are within original range, scale as per usual
-#     index = (x >= scaler['low']) & (x <= 1)
-#     if index.all():
-#         return (x - scaler['low']) / (1 - scaler['low']) * 100
-    
-#     # If any similarity score exceeds the original range, update pickle file to reflect the new range
-#     if min(x) < scaler['low']:
-#         scaler['low'] = min(x)
-   
-#     with open('scaler.pkl', 'wb') as handle:
-#         pickle.dump(scaler, handle, protocol = pickle.HIGHEST_PROTOCOL)
-    
-#     # Then scale data according to new range
-#     x = (x - scaler['low']) / (1 - scaler['low'])
+    '''Takes (arrays of) numbers between -1 to 1, scales to be between 0 to 100'''
     return (x + 1) / 2 * 100
 
 def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
@@ -110,19 +89,19 @@ def query_models(text, relevance_threshold = 0, n = 10, spellcheck = True):
     # Problem is waiting for the model can take like 20s. Plus HuggingFace's Inference API has crashed on me for hours on end.
     # For 1st problem, I can set up fail-safe models using Doc2Vec or LSI after 5s etc., but I worry that it will always be triggered
     # I can setup fail-safe models using Doc2Vec or LSI, but in the meantime just try it first.
-    query = inference({'inputs': search, 'options' : {'use_cache' : True, 'wait_for_model' : True}})
+    query = inference({'inputs' : search, 'options' : {'use_cache' : True, 'wait_for_model' : True}})
     cosine = util.pytorch_cos_sim(query, emb)
-    sim = np.argsort(-np.array(cosine[0]))[:n]
+    sim = np.array(cosine[0])
+    sim_index = np.argsort(-sim)[:n]
     
     # Get relevance scores & filter df
-    relevance = scale(sim)
-    output = df.iloc[sim, :5]
-    output['Relevance'] = relevance
+    output = df.iloc[sim_index, :5]
+    output['Relevance'] = scale(sim)[sim_index]
     output = output[output['Relevance'] > relevance_threshold]
     output = output[['Relevance','Scheme','Description', 'Agency', 'Image', 'Link']]
     
     jsonobject = output.to_json(orient = 'records')
     jsonobject = {  # Prolly wanna include some indicator here for front-end to say something like "Showing results for <search>. Search for <text> instead."
-        "data": json.loads(jsonobject) 
+        'data' : json.loads(jsonobject) 
     }
     return jsonobject
