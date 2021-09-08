@@ -52,6 +52,15 @@ def gotit():
 def about():
 	return render_template('about.html')
 
+@app.route('/blog.html')
+def blog():
+	return render_template('blog.html')
+
+@app.route('/blog/gapfinder-analysis-of-queries-and-listings.html')
+def blog():
+	return render_template('gapfinder-analysis-of-queries-and-listings.html')
+
+
 
 @app.route('/schemespredict', methods=['get','post'])
 def schemes_predict():
