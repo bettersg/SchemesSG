@@ -56,12 +56,6 @@ def about():
 def blog():
 	return render_template('blog.html')
 
-@app.route('/blog/gapfinder-analysis-of-queries-and-listings.html')
-def blogpost():
-	return render_template('gapfinder-analysis-of-queries-and-listings.html')
-
-
-
 @app.route('/schemespredict', methods=['get','post'])
 def schemes_predict():
 	result = 'nil'
