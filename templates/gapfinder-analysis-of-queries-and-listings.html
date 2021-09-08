@@ -8,7 +8,7 @@
         content="Our very own ML engineer, Quintus, analyses the user queries and schemes data collected in our database to uncover how we can better meet social needs on the ground. This is just the beginning -- our data offers many more possibilities to help social sector agencies and planners get the sensing they need.">
     <meta property="og:image" content="../static/img/blog/queries.jpg">
     <meta name="author" content="Schemes SG team">
-    <title>Using Schemes SG's data to uncover unmet social needs and improve search</title>
+    <title>Using Schemes SG's data to identify unmet social needs in our users' search queries and next steps to improve the search model</title>
     <!-- Preloader -->
     <style>
         @keyframes hidePreloader {
@@ -134,13 +134,13 @@
                 <div class="col-lg-12">
                     <!-- Heading -->
                     <h1 class="h1 text-white text-center text-lg-left my-0">
-                        The "Gapfinder" Study: Using Schemes SG's data to uncover unmet social needs and improve search 
+                        The "Gapfinder" Study: Using Schemes SG's data to identify unmet social needs in our users' search queries and next steps to improve the search model
                     </h1>
                     <!-- Text -->
                     <p class="lead text-white text-center text-lg-left opacity-8 py-3">
                         The SchemesSG database has recently hit 300 schemes and >1,500 user queries. It’s not quite a
                         data lake yet, but perhaps a wading pool from which we
-                        can uncover insights on areas of unmet need in Singapore. We share some of these insights.
+                        can uncover insights on the top social needs in Singapore. We share some of these insights.
                     </p>
 
                 </div>
@@ -162,9 +162,9 @@
                 <div class="col-lg-12">
                     <span class="badge badge-primary badge-pill">#technology</span>
                     <p class="h6 lh-180 mt-4 mb-2">
-                        In this article, our very own ML engineer Quintus performs a data driven study to analyse the
+                        In this article, our very own ML engineer Quintus Lim performs a data driven study to analyse the
                         topology of the >300 schemes in our Bank and >1,500 user queries we have
-                        served so far. Quintus then uses certain techniques to study the fit
+                        served so far. Quintus then uses certain techniques to analyse the fit
                         between the listings and the queries, and explains how our team leverages such insights to
                         improve
                         Schemes Pal's search model.
@@ -188,16 +188,16 @@
                         My blog post today first briefly explains the analytical techniques used to profile the schemes
                         and user queries we've collected, then analyses the results to identify which social areas
                         frequently see unmet needs, and how schemes may be addressing them. This is still preliminary
-                        work, and we hope that as this analysis progresses, it can help serve as a “gapfinder”
+                        work, and we hope that as our user base grows and the <a href="https://schemes.sg/schemesbank.html" target="_blank"> Schemes Bank</a> becomes a more comprehensive snapshot of the entire social service, it can help serve as a “gapfinder”
                         for unmet social needs in Singapore.
                         <br><br><u><b>Profiling user queries </b></u><br><br>
-                        I start by teasing out the main topics that user queries on our site tend to fall
-                        under. With >1,500 queries to date, it’s inconvenient to read them
+                        I start by teasing out the main topics that user queries tend to fall
+                        under. With >1,500 queries to date collected via <a href="https://schemes.sg/schemespal.html" target="_blank">Schemes Pal</a>, it’s inconvenient to read them
                         manually and we need data science techniques. There are at least 3 ways to approach this:
                         <br>
                         • Classification/supervised learning (e.g. k-Nearest Neighbours) which requires humans to define
                         all
-                        relevant topics beforehand<br>;
+                        relevant topics beforehand;<br>
                         • Self-supervised learning (e.g. Doc2Vec) which picks labels from within the training
                         data itself;<br>
                         • Clustering/unsupervised learning (e.g. k-Means) which solely analyses the features intrinsic
@@ -207,7 +207,7 @@
                         Sometimes even I don't fully remember how these models work, but what’s important is to
                         recognise their pros and cons. For instance, supervised learning uses explicit
                         labels
-                        which make our results more interpretable. But this approach had its drawbacks. First, creating
+                        which make our results more interpretable. But this approach has its drawbacks. First, creating
                         those labels is labour-intensive and
                         they may not be
                         accurate. Second, it's hard to label cross-domain queries (e.g.<i> “Financial aid for caregiver
@@ -217,16 +217,16 @@
                         just “spin the lottery”, i.e. blindly pick the most frequently-made query to maximise the
                         chances of
                         being correct. Too much work for no guarantee of results – basically the typical Singaporean’s
-                        workday!
+                        work day!
                         <br><br>
                         <u>This made us consider unsupervised learning</u> (e.g. k-Means, LSI, LDA
                         etc). These models are much less labour-intensive because there’s no need to manually label user
-                        queries. But they entail their own set of challengese(e.g. with many possible topics and the
+                        queries. But they entail their own set of challenges (e.g. with many possible topics and the
                         high-dimensionality of text data, tuning
                         k-Means is like trying to get a promotion – literally nothing works. Also, k-Means and LSI
                         topics aren’t always interpretable, while LDA has so many hyperparameters I didn’t even
                         try).<br><br>
-                        The above considerations directed us to <u>models based on word vectors</u>, such as Doc2Vec and
+                        The above considerations directed our attention to <u>models based on word vectors</u>, such as Doc2Vec and
                         pre-trained transformers, which essentially find ways to convert text into numbers. These are
                         getting
                         increasingly accurate. We further found that Doc2Vec and LSI underperformed pre-trained BERTs in
@@ -253,6 +253,7 @@
                                 target="_blank">here</a> for now, where readers can hover their mouse over
                             any bar or bubble to highlight the topic of the query and display share of queries falling
                             under that topic.</i><br><br>
+                        Some key points to be gleaned from this:
                         • Search terms are generated by users, but topics are hand-labelled by me after looking at what
                         tends to fall under the topic, and are neither fully objective nor comprehensive.<br>
                         • The embedding quality is pretty good even in just 2 dimensions. Not only are same-topic
@@ -282,8 +283,8 @@
                         providing clearer signals to algorithms which don’t really care about linguistic formalities.
                         <br><br><u><b>Profiling schemes listings </b></u><br><br>
                         Meeting these user queries are the various public, private, and non-profit schemes across
-                        Singapore which form the <a href="https://schemes.sg/scheemsbank.html" target="_blank">Schemes
-                            Bank</a>. But queries and schemes have some key differences –
+                        Singapore which form the Schemes
+                            Bank. But queries and schemes have some key differences –
                         <u>queries tend to focus on the problem, while schemes focus on the solution</u>. For instance,
                         schemes
                         in health care tend to describe their financial assistance, caregiving/nursing services,
