@@ -57,7 +57,7 @@ def blog():
 	return render_template('blog.html')
 
 @app.route('/blog/gapfinder-analysis-of-queries-and-listings.html')
-def blog():
+def blogpost():
 	return render_template('gapfinder-analysis-of-queries-and-listings.html')
 
 
