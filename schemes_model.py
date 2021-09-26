@@ -73,12 +73,13 @@ def search_similar_schemes(search_term, x):
                 'Description': df_schemes['Description'][scheme[0]],
                 'Agency': df_schemes['Agency'][scheme[0]],
                 'Image': df_schemes['Image'][scheme[0]],
-                'Link': df_schemes['Link'][scheme[0]]
+                'Link': df_schemes['Link'][scheme[0]],
+                'FSC': df_schemes['FSC'][scheme[0]]
             }
         )
         if j == (schemes_index.num_best-1):
             break
-    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link'])
+    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link', 'FSC'])
     output = output[output['Relevance']>x]
     jsonobject = output.to_json(orient = "records") #.encode('unicode-escape').decode('unicode-escape')
     counter = counter + 1
