@@ -32,7 +32,7 @@ function handle__schemespal() {
         .then((resp) => resp.json()) // Transform the data into json
         .then(function (resp) {
             // code for handling the data you get from the API
-            //console.log(resp);
+            console.log(resp);
             var segment = $("#filler");
             segment.html("");
             for (var i = 0; i < resp.data.length; i++) {
