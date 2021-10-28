@@ -19,6 +19,14 @@ schemes_lsi_corpus = gensim.corpora.MmCorpus('weights_generation/schemes_lsi_mod
 
 spacy_nlp = spacy.load('en_core_web_sm')
 
+#For mentalhealth
+import pickle
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+tvec_optimised = pickle.load(open('weights_generation/tvec', 'rb'))
+mhmodel = pickle.load(open('weights_generation/mentalhealth', 'rb'))
+
 #create list of punctuations and stopwords
 punctuations = string.punctuation
 stop_words = spacy.lang.en.stop_words.STOP_WORDS
@@ -50,6 +58,17 @@ def spacy_tokenizer(sentence):
     #return tokens
     return tokens
 
+#create stemmer for mentalhealth
+porter = PorterStemmer()
+def stemSentence(sentence):
+    token_words=word_tokenize(sentence)
+    token_words
+    stem_sentence=[]
+    for word in token_words:
+        stem_sentence.append(porter.stem(word))
+        stem_sentence.append(" ")
+    return "".join(stem_sentence)
+
 from gensim.similarities import MatrixSimilarity
 schemes_index = MatrixSimilarity(schemes_lsi_corpus, num_features = schemes_lsi_corpus.num_terms)
 
@@ -74,16 +93,25 @@ def search_similar_schemes(search_term, x):
                 'Agency': df_schemes['Agency'][scheme[0]],
                 'Image': df_schemes['Image'][scheme[0]],
                 'Link': df_schemes['Link'][scheme[0]],
-                'FSC': df_schemes['FSC'][scheme[0]]
+                'What it gives': df_schemes['What it gives'][scheme[0]],
+                'Scheme Type': df_schemes['What it gives'][scheme[0]]
             }
         )
         if j == (schemes_index.num_best-1):
             break
-    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link', 'FSC'])
+
+    mhprob = mhmodel.predict_proba(tvec_optimised.transform([str(stemSentence(search_term))]).todense())[0][1]
+    
+    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link', 'What it gives', 'Scheme Type'])
+    output['Relevance'] = output.apply(lambda x: (x['Relevance'] * 1.05 ) if ((('mental health' or 'counselling' or 'emotional care' or 'casework' in x['Scheme Type'].lower()) or
+                                                                              ('mental health' or 'counselling' or 'emotional care' or 'casework' in x['What it gives'].lower())) and 
+                                                                              (mhprob > 0.55)) else x['Relevance'], axis=1)
+    output = output.sort_values(by=['Relevance'], ascending= False)
     output = output[output['Relevance']>x]
     jsonobject = output.to_json(orient = "records") #.encode('unicode-escape').decode('unicode-escape')
     counter = counter + 1
-    jsonobject = { 
+    jsonobject = {
+        "mh": mhprob,
         "number_requests_till_date": counter,
         "data": json.loads(jsonobject) 
     }
