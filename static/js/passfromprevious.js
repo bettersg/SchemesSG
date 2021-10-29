@@ -2,8 +2,6 @@ if (window.location.search.indexOf('query') == 1) {
     var urlParams = new URLSearchParams(window.location.search)
     var q = urlParams.get('query')
     var r = urlParams.get('relevance')
-    console.log(q)
-    console.log(r)
 
     // The data we are going to send in our request
     let data_package = {
@@ -16,7 +14,7 @@ if (window.location.search.indexOf('query') == 1) {
     segment.html("");
     $("#filler").hide().append('<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>').fadeIn(1000);
 
-    var url = "https://schemes.sg/schemespredict";
+    var url = "https://schemestest.herokuapp.com/schemespredict";
 
 
     // Create our request constructor with all the parameters we need
@@ -39,6 +37,7 @@ if (window.location.search.indexOf('query') == 1) {
             console.log(resp);
             var segment = $("#filler");
             segment.html("");
+            if(resp.mh < 0.55){
             for (var i = 0; i < resp.data.length; i++) {
                 scheme = resp.data[i].Scheme;
                 agency = resp.data[i].Agency;
@@ -48,7 +47,21 @@ if (window.location.search.indexOf('query') == 1) {
                 link = resp.data[i].Link;
                 codeblock = '<div class="col-lg-12"><div class="card text-center hover-translate-y-n10 hover-shadow-lg"><div class="px-3 pb-5 pt-5"><div class="py-4"><div class="icon text-warning icon-sm mx-auto"><img height="100" width="100" src="' + image + '"></div></div><h5 class="">' + scheme + '</h5><h6 class=" mt-2 mb-0">' + agency + '</h6><p class=" mt-2 mb-0">Relevance Score: ' + relevance + '</p><p class=" mt-2 mb-0">' + description + '</p><div class="mt-4"><div class="mt-4"><a href="' + link + '" target="_blank" class="link-underline-warning"> Visit Site </a></div></div></div></div>'
                 $("#filler").hide().append(codeblock).fadeIn(1000);
-            }
+            }}
+            
+            if(resp.mh >= 0.55){
+                codeblockstart='<div class="text-center mr-2 ml-2"><p>Hey there, we know that things can be stressful for you or your client. Aside from physical needs, do remember to take care of your mental and emotional health too. <br><br> We\'ve slightly pushed up schemes offering mental and emotional support. If you need help, you can visit <u><b><a href="https://schemes.sg/schemespal.html?query=counselling,%20mental%20health,%20emotional%20care&relevance=16" target="_blank">here</a></b></u> for more resources.</p></div><br><br>'
+                $("#filler").hide().append(codeblockstart).fadeIn(1000);
+                for (var i = 0; i < resp.data.length; i++) {
+                    scheme = resp.data[i].Scheme;
+                    agency = resp.data[i].Agency;
+                    image = resp.data[i].Image;
+                    relevance = resp.data[i].Relevance;
+                    description = resp.data[i].Description;
+                    link = resp.data[i].Link;
+                    codeblock1 = '<div class="col-lg-12"><div class="card text-center hover-translate-y-n10 hover-shadow-lg"><div class="px-3 pb-5 pt-5"><div class="py-4"><div class="icon text-warning icon-sm mx-auto"><img height="100" width="100" src="' + image + '"></div></div><h5 class="">' + scheme + '</h5><h6 class=" mt-2 mb-0">' + agency + '</h6><p class=" mt-2 mb-0">Relevance Score: ' + relevance + '</p><p class=" mt-2 mb-0">' + description + '</p><div class="mt-4"><div class="mt-4"><a href="' + link + '" target="_blank" class="link-underline-warning"> Visit Site </a></div></div></div></div>'
+                    $("#filler").hide().append(codeblock1).fadeIn(1000);
+                }}
             if (resp.data.length == 0) {
                 $("#filler").append('<div class="text-center"><h4>No results matching your search.</h4></div><br><br>')
             }
@@ -56,6 +69,7 @@ if (window.location.search.indexOf('query') == 1) {
         })
         .catch(function (err) {
             // service the errors
+            console.log(resp.mh);
             console.log(err);
         });
 
