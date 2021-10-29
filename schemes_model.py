@@ -21,8 +21,10 @@ spacy_nlp = spacy.load('en_core_web_sm')
 
 #For mentalhealth
 import pickle
+import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
+nltk.download('punkt')
 
 tvec_optimised = pickle.load(open('weights_generation/tvec', 'rb'))
 mhmodel = pickle.load(open('weights_generation/mentalhealth', 'rb'))
@@ -94,25 +96,25 @@ def search_similar_schemes(search_term, x):
                 'Image': df_schemes['Image'][scheme[0]],
                 'Link': df_schemes['Link'][scheme[0]],
                 'What it gives': df_schemes['What it gives'][scheme[0]],
-                'Scheme Type': df_schemes['What it gives'][scheme[0]]
+                'Scheme Type': df_schemes['Scheme Type'][scheme[0]]
             }
         )
         if j == (schemes_index.num_best-1):
             break
+  
+    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link', 'What it gives', 'Scheme Type'])
 
     mhprob = mhmodel.predict_proba(tvec_optimised.transform([str(stemSentence(search_term))]).todense())[0][1]
-    
-    output = pd.DataFrame(schemes_names, columns=['Relevance','Scheme','Description', 'Agency', 'Image', 'Link', 'What it gives', 'Scheme Type'])
-    output['Relevance'] = output.apply(lambda x: (x['Relevance'] * 1.05 ) if ((('mental health' or 'counselling' or 'emotional care' or 'casework' in x['Scheme Type'].lower()) or
-                                                                              ('mental health' or 'counselling' or 'emotional care' or 'casework' in x['What it gives'].lower())) and 
-                                                                              (mhprob > 0.55)) else x['Relevance'], axis=1)
+
+    output['Relevance'] = output.apply(lambda y: (y['Relevance'] * 1.05 ) if ((('mental health' or 'counselling' or 'emotional care' or 'casework' in y['Scheme Type'].lower()) or
+                                                                              ('mental health' or 'counselling' or 'emotional care' or 'casework' in y['What it gives'].lower())) and 
+                                                                              (mhprob > 0.55)) else y['Relevance'], axis=1)
     output = output.sort_values(by=['Relevance'], ascending= False)
     output = output[output['Relevance']>x]
     jsonobject = output.to_json(orient = "records") #.encode('unicode-escape').decode('unicode-escape')
     counter = counter + 1
     jsonobject = {
-        "mh": mhprob,
-        "number_requests_till_date": counter,
-        "data": json.loads(jsonobject) 
+        "data": json.loads(jsonobject),
+        "mh": mhprob
     }
     return jsonobject
