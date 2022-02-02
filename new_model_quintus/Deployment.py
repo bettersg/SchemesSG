@@ -16,7 +16,7 @@ from string import punctuation
 from spellchecker import SpellChecker
 from sklearn.metrics.pairwise import pairwise_distances
 
-df = pd.read_csv('df.csv')
+df = pd.read_csv('../df.csv', encoding='cp1252')
 # with open('embeddings.pkl', 'rb') as handle:
 #     emb = pickle.load(handle)
 # biencoder = SentenceTransformer('paraphrase-distilroberta-base-v2')

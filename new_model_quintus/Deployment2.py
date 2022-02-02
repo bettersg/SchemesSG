@@ -15,7 +15,7 @@ import re
 from string import punctuation
 from spellchecker import SpellChecker
 
-df = pd.read_csv('df.csv')
+df = pd.read_csv('../df.csv', encoding='cp1252')
 # Until there's proper QC on schemes dataset
 df = df[df['Description'].str.len() >= 50]
 
