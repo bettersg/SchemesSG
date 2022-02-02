@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template
 import sys
 import os
-import schemes_model as schemes_model
+#import schemes_model as schemes_model
+from new_model_quintus import query as schemes_model
 import flask.json as json
 from flask_cors import CORS, cross_origin
 
@@ -64,7 +65,9 @@ def gapfinder():
 def schemes_predict():
 	result = 'nil'
 	try:
+		print("Starting prediction for query:")
 		input = request.get_json()
+		print(input)
 		query = input['query']
 		relevance = int(input['relevance'])
 		result = schemes_model.search_similar_schemes(query, relevance)
