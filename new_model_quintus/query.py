@@ -9,7 +9,7 @@ df = pd.read_csv('df.csv')
 
 model = SentenceTransformer('paraphrase-mpnet-base-v2')
 
-with open('embeddings.pkl', 'rb') as handle:
+with open('emb.pkl', 'rb') as handle:
     emb = pickle.load(handle)
 
 spell = SpellChecker()
@@ -74,7 +74,7 @@ def search_similar_schemes(text, relevance = 0, n = 5, spellcheck = True):
     
     # Get relevance scores & filter df
     sim = scale(sim[index])
-    df_out = df.iloc[index, ['Scheme', 'Description', 'Agency', 'Image', 'Link']]
+    df_out = df.loc[index, ['Scheme', 'Description', 'Agency', 'Image', 'Link']]
     df_out['Relevance'] = sim
     df_out = df_out.loc[df_out['Relevance'] > relevance, ['Relevance', 'Scheme', 'Description', 'Agency', 'Image', 'Link']]
     
