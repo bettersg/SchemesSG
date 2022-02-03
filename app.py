@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import sys
 import os
 #import schemes_model as schemes_model
-from new_model_quintus import query as schemes_model
+from bert_model import query as schemes_model
 import flask.json as json
 from flask_cors import CORS, cross_origin
 
