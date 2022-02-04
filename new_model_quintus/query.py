@@ -70,7 +70,7 @@ def call_lsi(search):
     with open('corpus.pkl', 'rb') as handle:
         corpus = pickle.load(handle)
     lsi = models.LsiModel(corpus, id2word = dic, num_topics = 300)
-    tokens = nltk.word_tokenize(search.strip())
+    tokens = nltk.word_tokenize(search.lower())
 
     # Get top 3 indexes for LSI
     vec_bow = dic.doc2bow(tokens)
