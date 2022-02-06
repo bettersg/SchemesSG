@@ -81,7 +81,7 @@ def call_lsi(search):
     index = similarities.MatrixSimilarity(lsi[corpus])
     return np.argmax(index[vec_lsi])
 
-def search_similar_schemes(text, relevance = 0, n = 5, spellcheck = True):
+def search_similar_schemes(text, relevance = 0, n = 5, spellcheck = True, lsi = True):
     '''Takes a user search, returns top n results. "relevance" is the relevance score threshold (from the old API)'''
     print('Searching...')
     text = str(text).strip()
