@@ -24,7 +24,7 @@ import pickle
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
-nltk.download('punkt')
+#nltk.download('punkt')
 
 tvec_optimised = pickle.load(open('weights_generation/tvec', 'rb'))
 mhmodel = pickle.load(open('weights_generation/mentalhealth', 'rb'))

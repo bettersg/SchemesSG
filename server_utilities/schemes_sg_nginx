@@ -1,9 +1,26 @@
 server {
     listen 80;
-    server_name 34.124.159.71 api.schemes.sg;
+    server_name api.schemes.sg 34.124.159.71;
+    include snippets/letsencrypt.conf;
+
+    location / {
+        return 200 'OK';
+    }
+}
+
+server {
+    listen 443 ssl; # managed by Certbot
+    server_name api.schemes.sg 34.124.159.71;
+    include snippets/letsencrypt.conf;
+
+    ssl_certificate /etc/letsencrypt/live/api.schemes.sg/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/api.schemes.sg/privkey.pem; # managed by Certbot
+    ssl_trusted_certificate /etc/letsencrypt/live/api.schemes.sg/chain.pem;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
     location / {
         include uwsgi_params;
         uwsgi_pass unix:/opt/SchemesSG/schemes_sg.sock;
     }
+
 }
