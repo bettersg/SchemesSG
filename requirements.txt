@@ -12,3 +12,4 @@ wordcloud==1.8.1
 pyspellchecker==0.6.3
 sentence-transformers==2.1.0
 python-decouple==3.5
+uWSGI==2.0.20

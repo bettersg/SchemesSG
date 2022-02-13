@@ -1,0 +1,12 @@
+[Unit]
+Description=uWSGI instance to serve SchemesSG
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/SchemesSG
+ExecStart=/bin/uwsgi --ini /opt/SchemesSG/server_utilities/schemes_sg.ini
+
+[Install]
+WantedBy=multi-user.target
