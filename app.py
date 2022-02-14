@@ -73,7 +73,7 @@ def schemes_predict():
 	return result
 
 @app.route('/test_api.html')
-def update():
+def test_api():
     return render_template('test_api.html')
 
 if __name__ == '__main__':
