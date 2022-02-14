@@ -60,6 +60,10 @@ def blog():
 def gapfinder():
 	return render_template('gapfinder-analysis-of-queries-and-listings.html')
 
+@app.route('/test_api.html')
+def update():
+    return render_template('test_api.html')
+
 @app.route('/schemespredict', methods=['get','post'])
 def schemes_predict():
 	result = 'nil'
@@ -71,10 +75,6 @@ def schemes_predict():
 	except Exception as e:
 		print('Error: ',e)
 	return result
-
-@app.route('/test_api.html')
-def update():
-    return render_template('test_api.html')
 
 if __name__ == '__main__':
 	port = int(os.getenv("PORT",9099))
