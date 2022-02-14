@@ -72,6 +72,10 @@ def schemes_predict():
 		print('Error: ',e)
 	return result
 
+@app.route('/test_api.html')
+def update():
+    return render_template('test_api.html')
+
 if __name__ == '__main__':
 	port = int(os.getenv("PORT",9099))
 	app.run(host='0.0.0.0',port=port,debug=True)
