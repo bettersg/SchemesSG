@@ -60,9 +60,9 @@ def blog():
 def gapfinder():
 	return render_template('gapfinder-analysis-of-queries-and-listings.html')
 
-@app.route('/test_api.html')
-def update():
-    return render_template('schemespal.html')
+@app.route('/testing.html')
+def testing():
+    return render_template('testing.html')
 
 @app.route('/schemespredict', methods=['get','post'])
 def schemes_predict():
