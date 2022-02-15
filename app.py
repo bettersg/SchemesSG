@@ -62,7 +62,7 @@ def gapfinder():
 
 @app.route('/testing.html')
 def testing():
-    return render_template('testing.html')
+    return render_template('blog.html')
 
 @app.route('/schemespredict', methods=['get','post'])
 def schemes_predict():
