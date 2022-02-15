@@ -77,5 +77,4 @@ def schemes_predict():
 	return result
 
 if __name__ == '__main__':
-	port = int(os.getenv("PORT",9099))
-	app.run(host='0.0.0.0',port=port,debug=True)
+	app.run(debug=True)
