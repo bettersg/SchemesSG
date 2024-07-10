@@ -97,35 +97,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Collapse -->
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
-                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">More</a>
-                        <div class="dropdown-menu dropdown-menu-single">
-                            <a href="schemespal.html" class="dropdown-item">Schemes Pal</a>
-                            <a href="schemesbank.html" class="dropdown-item">Schemes Bank</a>
-                            <a href="schemescase.html" class="dropdown-item">Schemes Case</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="about.html" class="dropdown-item">About</a>
-                            <a href="blog.html" class="dropdown-item">Blog</a>
-                            <a href="team.html" class="dropdown-item">Our Team</a>
-                            <a href="update.html" class="dropdown-item">Updates</a>
-                        </div>
-                    </li>
-                </ul>
-                <!-- Button -->
-                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="listing.html">
-                    Add listing
-                </a>
-                <!-- Mobile button -->
-                <div class="d-lg-none text-center mt-4 mb-2">
-                    <a href="listing.html" class="btn btn-block btn-sm btn-warning">Add listing</a>
-                </div>
-            </div>
+            
         </div>
     </nav>
     
@@ -152,38 +124,19 @@
                     </h1>
                     <!-- Text -->
                     <p class="lead text-center text-md-left text-muted">
-                        Search for public assistance in Singapore easily.
+                        <strong>Search for public assistance in Singapore easily.</strong>
                         <br><br><br>
                     </p>
 
-                    <!-- Form -->
-                    <form id="indexpal">
-                        <div class="form-group">
-                            <textarea id="indexpal-text" class="form-control form-control-lg" name="Query"
-                                placeholder="E.g. I am a dialysis patient in need of financial assistance and food support after being retrenched due to COVID 19"
-                                rows="3" required></textarea>
-                        </div>
-
-
-
-                        <div class="text-center">
-                            <!-- <div class="g-recaptcha" data-sitekey="6Lfs5ScUAAAAANAJwGrdfvWLFRRiVbKRE2vfoaFj"></div> -->
-                            <button id="indexpal-submit" type="button" class="btn btn-sm btn-primary mt-4 mb-4"
-                                onclick="handle_indexpal()">Search</button>
-                        </div>
-                    </form>
-
+                    
                     <ul class="list-unstyled mb-0">
                         <li class="py-2">
                             <div class="d-flex align-items-center">
+
                                 <div>
-                                    <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                        <i class="fas fa-volume-up"></i>
-                                    </div>
+                                    <p class="mb-0">Hello! Schemes SG is currently undergoing maintenance as we work to provide you with a more powerful algorithm and allow you to chat with scheme information. As we undergo a revamp, click here to look at a trial version. We will be back shortly!</p>
                                 </div>
-                                <div>
-                                    <p class="mb-0">Tell us the help you need.</p>
-                                </div>
+                                
                             </div>
                         </li>
                     </ul>
@@ -191,13 +144,9 @@
                     <ul class="list-unstyled mb-0">
                         <li class="py-2">
                             <div class="d-flex align-items-top">
-                                <div>
-                                    <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                        <i class="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="mb-0">Be specific (see e.g.). Don't give identifiable info.</p>
+
+                                <div class="text-center">
+                                    <button id="tryout" class="btn btn-sm btn-primary mt-4" onclick="window.location.href='https://schemesv2-app-5utlyjp5uq-as.a.run.app/'">Take a sneak peek of the new version in the meantime!</button>
                                 </div>
                             </div>
                         </li>
@@ -388,7 +337,6 @@
                     <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
                         <h6 class="heading mb-3">Sub-products</h6>
                         <ul class="list-unstyled">
-                            <li><a href="schemespal.html">Schemes Pal</a></li>
                             <li><a href="schemesbank.html">Schemes Bank</a></li>
                             <li><a href="schemescase.html">Schemes Case</a></li>
                         </ul>
