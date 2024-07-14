@@ -72,6 +72,7 @@ def schemes_predict():
 		query = input['query']
 		relevance = int(input['relevance'])
 		result = schemes_model.search_similar_schemes(query, relevance)
+		print(result)
 	except Exception as e:
 		print('Error: ',e)
 	return result
